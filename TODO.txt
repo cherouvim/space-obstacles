@@ -1,0 +1,8 @@
+TODOs
+- manifest.json
+- splash screen?
+- favicon
+- sounds
+- adjust graphics sizes
+- pich a sound engine
+- fix transparencies
