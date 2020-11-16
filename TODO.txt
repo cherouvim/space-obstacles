@@ -1,11 +1,17 @@
 TODOs
-- SEO, metatags, basic sitemap, submit to google.
 - fix transparencies
 - sounds
-- github link
-- analytics
-- manifest.json
-- splash screen?
-- favicon
 - adjust graphics sizes
 - evaluate a sound engine (volume, mix, play pause)
+- analytics
+
+IMPROVE
+- favicon
+- manifest.json metadata
+- SEO metatags
+
+MAYBE
+
+NO/IGNORE
+- github link
+- splash screen
