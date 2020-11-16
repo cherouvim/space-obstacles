@@ -1,4 +1,5 @@
 TODOs
+- SEO, metatags, basic sitemap, submit to google.
 - fix transparencies
 - sounds
 - github link
