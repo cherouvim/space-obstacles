@@ -2,7 +2,6 @@ TODOs
 - sounds
 - adjust graphics sizes
 - evaluate a sound engine (volume, mix, play pause)
-- analytics
 
 IMPROVE
 - favicon
