@@ -4,7 +4,7 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 	<url>
-		<loc>https://obstables.space/</loc>
+		<loc>https://obstacles.space/</loc>
 		<lastmod>2020-11-15T10:10:10+00:00</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>1.0</priority>
