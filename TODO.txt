@@ -1,8 +1,10 @@
 TODOs
+- fix transparencies
+- sounds
+- github link
+- analytics
 - manifest.json
 - splash screen?
 - favicon
-- sounds
 - adjust graphics sizes
-- pich a sound engine
-- fix transparencies
+- evaluate a sound engine (volume, mix, play pause)
