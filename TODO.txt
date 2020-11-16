@@ -8,7 +8,9 @@ IMPROVE
 - manifest.json metadata
 - SEO metatags
 
-MAYBE
+MAYBE/FUTURE
+- use cloudflare
+
 
 NO/IGNORE
 - github link
