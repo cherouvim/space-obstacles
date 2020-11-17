@@ -1,0 +1,6 @@
+assets/originals
+assets/*.wav
+assets/ffmpeg-process*
+*_temp
+Vagrantfile
+.vagrant
