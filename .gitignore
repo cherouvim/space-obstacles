@@ -4,3 +4,4 @@ assets/ffmpeg-process*
 *_temp
 Vagrantfile
 .vagrant
+*.code-workspace
