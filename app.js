@@ -1,39 +1,41 @@
 (function (undefined) {
   "use strict";
 
-  console.log(123);
+  console.log("app.js");
 
-  function registerServiceWorker() {
-    if (!("serviceWorker" in navigator)) return;
-    console.log("Registering service worker");
-    navigator.serviceWorker.register("/service-worker.js", { scope: "/" }).then(
-      function () {
-        console.log("Service worker has been registered");
-      },
-      function (e) {
-        console.error("Service worker registration failed", e);
-      }
-    );
+  function createElementFromHTML(htmlString) {
+    var div = document.createElement("div");
+    div.innerHTML = htmlString.trim();
+    return div.firstChild;
   }
 
-  registerServiceWorker();
-
-  const sound = new Howl({
-    src: [
-      "assets/iasonas-bad-flame-ball.webm",
-      "assets/iasonas-bad-flame-ball.mp3",
-    ],
-    loop: true,
-    rate: 0.5,
-    volume: 0.2,
-    stereo: -0.4,
-    pos: [1, 1, 0],
+  window.GAME.data.backgrounds.map(function (background) {
+    document
+      .getElementById("backgrounds")
+      .appendChild(
+        createElementFromHTML(
+          `<div><h3>${background.name}</h3><img src="${background.image}" /></div>`
+        )
+      );
   });
 
-  document.getElementById("play").addEventListener("click", function () {
-    sound.play();
+  window.GAME.data.obstacles.map(function (obstacle) {
+    const obstacleDom = createElementFromHTML(
+      `<div><h3>${obstacle.name}</h3><img src="${obstacle.image}" /></div>`
+    );
+    obstacleDom.querySelector("img").addEventListener("click", function () {
+      obstacle.sound.play();
+    });
+    document.getElementById("obstacles").appendChild(obstacleDom);
   });
-  document.getElementById("stop").addEventListener("click", function () {
-    sound.stop();
+
+  window.GAME.data.players.map(function (player) {
+    document
+      .getElementById("players")
+      .appendChild(
+        createElementFromHTML(
+          `<div><h3>${player.name}</h3><img src="${player.image}" /></div>`
+        )
+      );
   });
 })();
