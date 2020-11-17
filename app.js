@@ -17,4 +17,23 @@
   }
 
   registerServiceWorker();
+
+  const sound = new Howl({
+    src: [
+      "assets/iasonas-bad-flame-ball.webm",
+      "assets/iasonas-bad-flame-ball.mp3",
+    ],
+    loop: true,
+    rate: 0.5,
+    volume: 0.2,
+    stereo: -0.4,
+    pos: [1, 1, 0],
+  });
+
+  document.getElementById("play").addEventListener("click", function () {
+    sound.play();
+  });
+  document.getElementById("stop").addEventListener("click", function () {
+    sound.stop();
+  });
 })();
