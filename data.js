@@ -370,12 +370,12 @@
         }),
       },
       {
-        name: "bad-black-tar",
-        image: "assets/orestis-bad-black-tar.png",
+        name: "bad-bean-meteor",
+        image: "assets/orestis-bad-bean-meteor.png",
         sound: new Howl({
           src: [
-            "assets/orestis-bad-black-tar.webm",
-            "assets/orestis-bad-black-tar.mp3",
+            "assets/orestis-bad-bean-meteor.webm",
+            "assets/orestis-bad-bean-meteor.mp3",
           ],
         }),
       },
