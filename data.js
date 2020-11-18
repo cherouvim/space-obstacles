@@ -4,69 +4,69 @@
   window.GAME.data = {
     backgrounds: [
       {
-        name: "iasonas-background-particle-1",
+        name: "background-particle-1",
         image: "assets/iasonas-background-particle-1.png",
       },
       {
-        name: "iasonas-background-particle-2",
+        name: "background-particle-2",
         image: "assets/iasonas-background-particle-2.png",
       },
       {
-        name: "iasonas-background-particle-3",
+        name: "background-particle-3",
         image: "assets/iasonas-background-particle-3.png",
       },
       {
-        name: "iasonas-background-particle-4",
+        name: "background-particle-4",
         image: "assets/iasonas-background-particle-4.png",
       },
       {
-        name: "iasonas-background-particle-5",
+        name: "background-particle-5",
         image: "assets/iasonas-background-particle-5.png",
       },
       {
-        name: "iasonas-background-particle-6",
+        name: "background-particle-6",
         image: "assets/iasonas-background-particle-6.png",
       },
       {
-        name: "iasonas-background-particle-7",
+        name: "background-particle-7",
         image: "assets/iasonas-background-particle-7.png",
       },
       {
-        name: "iasonas-background-particle-8",
+        name: "background-particle-8",
         image: "assets/iasonas-background-particle-8.png",
       },
       {
-        name: "iasonas-background-particle-9",
+        name: "background-particle-9",
         image: "assets/iasonas-background-particle-9.png",
       },
       {
-        name: "iasonas-background-particle-10",
+        name: "background-particle-10",
         image: "assets/iasonas-background-particle-10.png",
       },
       {
-        name: "iasonas-background-particle-11",
+        name: "background-particle-11",
         image: "assets/iasonas-background-particle-11.png",
       },
       {
-        name: "iasonas-background-particle-12",
+        name: "background-particle-12",
         image: "assets/iasonas-background-particle-12.png",
       },
       {
-        name: "iasonas-background-particle-13",
+        name: "background-particle-13",
         image: "assets/iasonas-background-particle-13.png",
       },
       {
-        name: "iasonas-background-particle-14",
+        name: "background-particle-14",
         image: "assets/iasonas-background-particle-14.png",
       },
       {
-        name: "iasonas-background-particle-15",
+        name: "background-particle-15",
         image: "assets/iasonas-background-particle-15.png",
       },
     ],
     obstacles: [
       {
-        name: "iasonas-bad-big-alien-8-legs-5-hands",
+        name: "bad-big-alien-8-legs-5-hands",
         image: "assets/iasonas-bad-big-alien-8-legs-5-hands.png",
         sound: new Howl({
           src: [
@@ -76,7 +76,7 @@
         }),
       },
       {
-        name: "iasonas-bad-creature-with-thorns",
+        name: "bad-creature-with-thorns",
         image: "assets/iasonas-bad-creature-with-thorns.png",
         sound: new Howl({
           src: [
@@ -86,7 +86,7 @@
         }),
       },
       {
-        name: "iasonas-bad-flame-ball",
+        name: "bad-flame-ball",
         image: "assets/iasonas-bad-flame-ball.png",
         sound: new Howl({
           src: [
@@ -96,7 +96,7 @@
         }),
       },
       {
-        name: "iasonas-bad-humanoid-creature",
+        name: "bad-humanoid-creature",
         image: "assets/iasonas-bad-humanoid-creature.png",
         sound: new Howl({
           src: [
@@ -106,7 +106,7 @@
         }),
       },
       {
-        name: "iasonas-bad-katsarida",
+        name: "bad-katsarida",
         image: "assets/iasonas-bad-katsarida.png",
         sound: new Howl({
           src: [
@@ -116,7 +116,7 @@
         }),
       },
       {
-        name: "iasonas-bad-meteor-cloud",
+        name: "bad-meteor-cloud",
         image: "assets/iasonas-bad-meteor-cloud.png",
         sound: new Howl({
           src: [
@@ -126,7 +126,7 @@
         }),
       },
       {
-        name: "iasonas-bad-meteor-cutter",
+        name: "bad-meteor-cutter",
         image: "assets/iasonas-bad-meteor-cutter.png",
         sound: new Howl({
           src: [
@@ -136,7 +136,7 @@
         }),
       },
       {
-        name: "iasonas-bad-meteor-with-shields",
+        name: "bad-meteor-with-shields",
         image: "assets/iasonas-bad-meteor-with-shields.png",
         sound: new Howl({
           src: [
@@ -146,7 +146,7 @@
         }),
       },
       {
-        name: "iasonas-bad-flaming-ice",
+        name: "bad-flaming-ice",
         image: "assets/iasonas-bad-flaming-ice.png",
         sound: new Howl({
           src: [
@@ -156,7 +156,7 @@
         }),
       },
       {
-        name: "iasonas-bad-rocket",
+        name: "bad-rocket",
         image: "assets/iasonas-bad-rocket.png",
         sound: new Howl({
           src: [
@@ -166,7 +166,7 @@
         }),
       },
       {
-        name: "iasonas-bad-small-tentacle",
+        name: "bad-small-tentacle",
         image: "assets/iasonas-bad-small-tentacle.png",
         sound: new Howl({
           src: [
@@ -176,7 +176,7 @@
         }),
       },
       {
-        name: "iasonas-bad-irritating-rocket-powered-obstacle",
+        name: "bad-irritating-rocket-powered-obstacle",
         image: "assets/iasonas-bad-irritating-rocket-powered-obstacle.png",
         sound: new Howl({
           src: [
@@ -186,7 +186,7 @@
         }),
       },
       {
-        name: "iasonas-bad-racing-car",
+        name: "bad-racing-car",
         image: "assets/iasonas-bad-racing-car.png",
         sound: new Howl({
           src: [
@@ -196,7 +196,7 @@
         }),
       },
       {
-        name: "iasonas-bad-tv-set",
+        name: "bad-tv-set",
         image: "assets/iasonas-bad-tv-set.png",
         sound: new Howl({
           src: [
@@ -206,7 +206,7 @@
         }),
       },
       {
-        name: "katerina-bad-big-alien",
+        name: "bad-big-alien",
         image: "assets/katerina-bad-big-alien.png",
         sound: new Howl({
           src: [
@@ -216,7 +216,7 @@
         }),
       },
       {
-        name: "katerina-bad-burger",
+        name: "bad-burger",
         image: "assets/katerina-bad-burger.png",
         sound: new Howl({
           src: [
@@ -226,7 +226,7 @@
         }),
       },
       {
-        name: "katerina-bad-corona",
+        name: "bad-corona",
         image: "assets/katerina-bad-corona.png",
         sound: new Howl({
           src: [
@@ -236,7 +236,7 @@
         }),
       },
       {
-        name: "katerina-bad-flower",
+        name: "bad-flower",
         image: "assets/katerina-bad-flower.png",
         sound: new Howl({
           src: [
@@ -246,7 +246,7 @@
         }),
       },
       {
-        name: "katerina-bad-internet-explorer",
+        name: "bad-internet-explorer",
         image: "assets/katerina-bad-internet-explorer.png",
         sound: new Howl({
           src: [
@@ -256,7 +256,7 @@
         }),
       },
       {
-        name: "katerina-bad-meteor",
+        name: "bad-meteor",
         image: "assets/katerina-bad-meteor.png",
         sound: new Howl({
           src: [
@@ -266,7 +266,7 @@
         }),
       },
       {
-        name: "katerina-bad-red-bomb",
+        name: "bad-red-bomb",
         image: "assets/katerina-bad-red-bomb.png",
         sound: new Howl({
           src: [
@@ -276,7 +276,7 @@
         }),
       },
       {
-        name: "katerina-bad-spaceship",
+        name: "bad-spaceship",
         image: "assets/katerina-bad-spaceship.png",
         sound: new Howl({
           src: [
@@ -286,7 +286,7 @@
         }),
       },
       {
-        name: "katerina-bad-star",
+        name: "bad-star",
         image: "assets/katerina-bad-star.png",
         sound: new Howl({
           src: [
@@ -296,7 +296,7 @@
         }),
       },
       {
-        name: "orestis-bad-ahinos",
+        name: "bad-ahinos",
         image: "assets/orestis-bad-ahinos.png",
         sound: new Howl({
           src: [
@@ -306,7 +306,7 @@
         }),
       },
       {
-        name: "orestis-bad-black-tar",
+        name: "bad-black-tar",
         image: "assets/orestis-bad-black-tar.png",
         sound: new Howl({
           src: [
@@ -316,7 +316,7 @@
         }),
       },
       {
-        name: "orestis-bad-hairy-salamandra",
+        name: "bad-hairy-salamandra",
         image: "assets/orestis-bad-hairy-salamandra.png",
         sound: new Howl({
           src: [
@@ -326,7 +326,7 @@
         }),
       },
       {
-        name: "orestis-bad-tsouhtra",
+        name: "bad-tsouhtra",
         image: "assets/orestis-bad-tsouhtra.png",
         sound: new Howl({
           src: [
@@ -339,7 +339,7 @@
 
     players: [
       {
-        name: "iasonas-player-medusa",
+        name: "player-medusa",
         image: "assets/iasonas-player-medusa.png",
         sound: new Howl({
           src: [
