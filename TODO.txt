@@ -1,5 +1,8 @@
 TODOs
 - sounds
+- optimize graphics (png 256 alpha contains extra photo at the corners???)
+- enter rorations, speeds etc
+- implement rotations on library
 - adjust graphics sizes
 - evaluate a sound engine (volume, mix, play pause)
 
