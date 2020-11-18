@@ -63,6 +63,70 @@
         name: "background-particle-15",
         image: "assets/iasonas-background-particle-15.png",
       },
+      {
+        name: "background-particle-16",
+        image: "assets/orestis-background-particle-16.png",
+      },
+      {
+        name: "background-particle-17",
+        image: "assets/orestis-background-particle-17.png",
+      },
+      {
+        name: "background-particle-18",
+        image: "assets/orestis-background-particle-18.png",
+      },
+      {
+        name: "background-particle-19",
+        image: "assets/orestis-background-particle-19.png",
+      },
+      {
+        name: "background-particle-20",
+        image: "assets/orestis-background-particle-20.png",
+      },
+      {
+        name: "background-particle-21",
+        image: "assets/orestis-background-particle-21.png",
+      },
+      {
+        name: "background-particle-22",
+        image: "assets/orestis-background-particle-22.png",
+      },
+      {
+        name: "background-particle-23",
+        image: "assets/orestis-background-particle-23.png",
+      },
+      {
+        name: "background-particle-24",
+        image: "assets/iasonas-background-particle-24.png",
+      },
+      {
+        name: "background-particle-25",
+        image: "assets/iasonas-background-particle-25.png",
+      },
+      {
+        name: "background-particle-26",
+        image: "assets/iasonas-background-particle-26.png",
+      },
+      {
+        name: "background-particle-27",
+        image: "assets/iasonas-background-particle-27.png",
+      },
+      {
+        name: "background-particle-28",
+        image: "assets/iasonas-background-particle-28.png",
+      },
+      {
+        name: "background-particle-29",
+        image: "assets/iasonas-background-particle-29.png",
+      },
+      {
+        name: "background-particle-30",
+        image: "assets/iasonas-background-particle-30.png",
+      },
+      {
+        name: "background-particle-31",
+        image: "assets/iasonas-background-particle-31.png",
+      },
     ],
     obstacles: [
       {
@@ -335,18 +399,65 @@
           ],
         }),
       },
+      {
+        name: "bad-colored-monster",
+        image: "assets/iasonas-bad-colored-monster.png",
+        sound: new Howl({
+          src: [
+            "assets/iasonas-bad-colored-monster.webm",
+            "assets/iasonas-bad-colored-monster.mp3",
+          ],
+        }),
+      },
+      {
+        name: "bad-spaceship-with-ants",
+        image: "assets/orestis-bad-spaceship-with-ants.png",
+        sound: new Howl({
+          src: [
+            "assets/orestis-bad-spaceship-with-ants.webm",
+            "assets/orestis-bad-spaceship-with-ants.mp3",
+          ],
+        }),
+      },
+      {
+        name: "bad-spaceship-with-astronauts",
+        image: "assets/orestis-bad-spaceship-with-astronauts.png",
+        sound: new Howl({
+          src: [
+            "assets/orestis-bad-spaceship-with-astronauts.webm",
+            "assets/orestis-bad-spaceship-with-astronauts.mp3",
+          ],
+        }),
+      },
     ],
-
     players: [
       {
         name: "player-medusa",
         image: "assets/iasonas-player-medusa.png",
-        sound: new Howl({
-          src: [
-            "assets/iasonas-player-medusa.webm",
-            "assets/iasonas-player-medusa.mp3",
-          ],
-        }),
+      },
+      {
+        name: "player-diplomatos",
+        image: "assets/iasonas-player-diplomatos.png",
+      },
+      {
+        name: "player-eksoheros",
+        image: "assets/iasonas-player-eksoheros.png",
+      },
+      {
+        name: "player-hromatistopodos",
+        image: "assets/iasonas-player-hromatistopodos.png",
+      },
+      {
+        name: "player-koftometeoritis",
+        image: "assets/iasonas-player-koftometeoritis.png",
+      },
+      {
+        name: "player-pyravlodiastimoplio",
+        image: "assets/iasonas-player-pyravlodiastimoplio.png",
+      },
+      {
+        name: "player-space-cockroach",
+        image: "assets/orestis-player-space-cockroach.png",
       },
     ],
   };
