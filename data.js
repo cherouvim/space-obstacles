@@ -320,7 +320,7 @@
         }),
       },
       {
-        name: "bad-meteor (TODO: sound)",
+        name: "bad-meteor",
         image: "assets/katerina-bad-meteor.png",
         sound: new Howl({
           src: [
@@ -400,7 +400,7 @@
         }),
       },
       {
-        name: "bad-colored-monster (TODO: sound)",
+        name: "bad-colored-monster",
         image: "assets/iasonas-bad-colored-monster.png",
         sound: new Howl({
           src: [
