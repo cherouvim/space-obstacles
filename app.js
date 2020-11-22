@@ -3,6 +3,13 @@
 
   console.log("app.js");
 
+  const game1sound = new Howl({
+    src: ["assets/game-1.webm", "assets/game-1.mp3"],
+    loop: true,
+    volume: 0.3,
+  });
+  game1sound.play();
+
   function createElementFromHTML(htmlString) {
     var div = document.createElement("div");
     div.innerHTML = htmlString.trim();
