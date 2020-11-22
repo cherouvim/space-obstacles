@@ -200,7 +200,7 @@
         }),
       },
       {
-        name: "bad-meteor-with-shields (TODO: sound)",
+        name: "bad-meteor-with-shields",
         image: "assets/iasonas-bad-meteor-with-shields.png",
         sound: new Howl({
           src: [
@@ -300,7 +300,7 @@
         }),
       },
       {
-        name: "bad-flower (TODO: sound)",
+        name: "bad-flower",
         image: "assets/katerina-bad-flower.png",
         sound: new Howl({
           src: [
@@ -330,7 +330,7 @@
         }),
       },
       {
-        name: "bad-red-bomb (TODO: sound)",
+        name: "bad-red-bomb",
         image: "assets/katerina-bad-red-bomb.png",
         sound: new Howl({
           src: [
@@ -350,7 +350,7 @@
         }),
       },
       {
-        name: "bad-star (TODO: sound)",
+        name: "bad-star",
         image: "assets/katerina-bad-star.png",
         sound: new Howl({
           src: [
