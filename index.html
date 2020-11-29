@@ -60,23 +60,22 @@
       fieldset#obstacles img:hover {
         filter: brightness(1.5);
       }
+      @keyframes rotating {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
     </style>
   </head>
   <body>
     <div id="content">
-      <fieldset id="backgrounds"><legend>background elements</legend></fieldset>
-      <fieldset id="obstacles"><legend>obstacles/enemies</legend></fieldset>
-      <fieldset id="players"><legend>players</legend></fieldset>
     </div>
 
     <script type="text/javascript" src="lib/howler.min.js"></script>    
-    <!-- <script type="text/javascript" src="lib/howler.spatial.min.js"></script>     -->
     <script type="text/javascript">window.GAME = {};</script>
-    <script type="text/javascript" src="register-service-worker.js"></script>
     <script type="text/javascript" src="data.js"></script>
     <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="register-service-worker.js" defer></script>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7736FBJ5Z0"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
