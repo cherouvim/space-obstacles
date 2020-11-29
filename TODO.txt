@@ -1,20 +1,25 @@
 TODOs
-- sounds
+- input rotations, speeds, pallete rotations etc
+- adjust graphics sizes on files? or setup size on data?
+- calculate game screen (max X, Y -> resize/scale canvas on more than that, or simply center a bounded box).
+- implement x, y & rotate movement based on time
+- implement sizex, sizey based on canvas size
 - optimize graphics (png 256 alpha contains extra photo at the corners???)
-- enter rorations, speeds etc
-- implement rotations on library
-- adjust graphics sizes
-- evaluate a sound engine (volume, mix, play pause)
+- webp
 
 IMPROVE
 - favicon
 - manifest.json metadata
 - SEO metatags
+- conditional rounding (rounding vs no rounding [subpixel rendering]) based on performance
 
 MAYBE/FUTURE
 - use cloudflare
 
-
 NO/IGNORE
 - github link
 - splash screen
+
+DONE
+- evaluate a sound engine (volume, mix, play pause)
+- sounds
