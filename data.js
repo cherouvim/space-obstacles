@@ -138,6 +138,10 @@
             "assets/iasonas-bad-big-alien-8-legs-5-hands.mp3",
           ],
         }),
+        speed: 1000,
+        rotation: 2000,
+        damage: 20,
+        hue: 2000,
       },
       {
         name: "bad-creature-with-thorns",
@@ -148,6 +152,10 @@
             "assets/iasonas-bad-creature-with-thorns.mp3",
           ],
         }),
+        speed: 3000,
+        rotation: 0,
+        damage: 0,
+        hue: 0,
       },
       {
         name: "bad-flame-ball",
@@ -158,6 +166,10 @@
             "assets/iasonas-bad-flame-ball.mp3",
           ],
         }),
+        speed: 6000,
+        rotation: 10,
+        damage: 0,
+        hue: 0,
       },
       {
         name: "bad-humanoid-creature",
@@ -168,6 +180,10 @@
             "assets/iasonas-bad-humanoid-creature.mp3",
           ],
         }),
+        speed: 0,
+        rotation: 0,
+        damage: 0,
+        hue: 2000,
       },
       {
         name: "bad-katsarida",
@@ -208,6 +224,7 @@
             "assets/iasonas-bad-meteor-with-shields.mp3",
           ],
         }),
+        hue: 3000,
       },
       {
         name: "bad-flaming-ice",

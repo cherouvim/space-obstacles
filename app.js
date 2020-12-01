@@ -195,8 +195,23 @@
     });
 
     window.GAME.data.obstacles.map(function (obstacle) {
+      const imgAnimation = [];
+      if (obstacle.rotation) {
+        imgAnimation.push(`rotate ${obstacle.rotation}ms linear infinite`);
+      }
+      const spanAnimation = [];
+      if (obstacle.speed) {
+        spanAnimation.push(`translate ${obstacle.speed}ms linear infinite`);
+      }
+      if (obstacle.hue) {
+        imgAnimation.push(`hue-rotate ${obstacle.hue}ms linear infinite`);
+      }
       const obstacleDom = createElementFromHTML(
-        `<div><h3>${obstacle.name}</h3><img src="${obstacle.image}" style="animation: rotating 2s linear infinite" /></div>`
+        `<div><h3>${
+          obstacle.name
+        }</h3><span style="animation: ${spanAnimation.join(", ")}"><img src="${
+          obstacle.image
+        }" style="animation: ${imgAnimation.join(", ")}" /></span></div>`
       );
       obstacleDom.querySelector("img").addEventListener("click", function () {
         obstacle.sound.play();

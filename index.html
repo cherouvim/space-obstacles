@@ -51,6 +51,12 @@
       img {
         zoom: 0.5;
       } */
+      fieldset div {
+        min-height: 9em;
+      }
+      fieldset span {
+        position: absolute;
+      }
       fieldset img {
         max-width: 5em;
       }
@@ -60,9 +66,29 @@
       fieldset#obstacles img:hover {
         filter: brightness(1.5);
       }
-      @keyframes rotating {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+      @keyframes rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes translate {
+        0%, 100% {
+          transform: translate(0px);
+        }
+        50% {
+          transform: translate(200px);
+        }
+      }
+      @keyframes hue-rotate {
+        0%, 100% {
+          filter: hue-rotate(0deg);
+        }
+        50% {
+          filter: hue-rotate(360deg);
+        }
       }
     </style>
   </head>
