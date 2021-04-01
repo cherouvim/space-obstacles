@@ -2,7 +2,7 @@
   "use strict";
 
   // utils.
-  const createElementFromHTML = (htmlString) => {
+  const createElementFromHTML = htmlString => {
     const div = document.createElement("div");
     div.innerHTML = htmlString.trim();
     return div.firstChild;
@@ -19,7 +19,7 @@
   );
   document.getElementById("content").prepend(fps);
 
-  const demoHtml = (itemsCount) => {
+  const demoHtml = itemsCount => {
     const items = [];
     for (let i = 0; i < itemsCount; i++) {
       const size = Math.random() * 40 + 50;
@@ -32,10 +32,9 @@
         data: window.GAME.data.obstacles[i % window.GAME.data.obstacles.length],
         elem: createElementFromHTML(
           `<img width="${size}px" src="${
-            window.GAME.data.obstacles[i % window.GAME.data.obstacles.length]
-              .image
+            window.GAME.data.obstacles[i % window.GAME.data.obstacles.length].image
           }" style="position: absolute; opacity: ${Math.random()}" />`
-        ),
+        )
       };
       document.getElementById("content").appendChild(items[i].elem);
     }
@@ -49,10 +48,8 @@
         const item = items[i];
         item.x += item.dx;
         item.y += item.dy;
-        if (item.x < 0 || item.x > window.innerWidth - item.size * 2)
-          item.dx = -item.dx;
-        if (item.y < 0 || item.y > window.innerHeight - item.size - 100)
-          item.dy = -item.dy;
+        if (item.x < 0 || item.x > window.innerWidth - item.size * 2) item.dx = -item.dx;
+        if (item.y < 0 || item.y > window.innerHeight - item.size - 100) item.dy = -item.dy;
       }
       for (let i = 0; i < itemsCount; i++) {
         const item = items[i];
@@ -63,8 +60,7 @@
       count++;
       if (second !== getSecond()) {
         second = getSecond();
-        fps.innerHTML =
-          count + "fps / " + (window.performance.now() - now) + "ms";
+        fps.innerHTML = count + "fps / " + (window.performance.now() - now) + "ms";
         count = 0;
       }
 
@@ -73,7 +69,7 @@
     window.requestAnimationFrame(animate);
   };
 
-  const demoCanvas = (itemsCount) => {
+  const demoCanvas = itemsCount => {
     const canvas = createElementFromHTML(`<canvas></canvas>`);
     document.getElementById("content").append(canvas);
     const context = canvas.getContext("2d");
@@ -92,10 +88,9 @@
         data: window.GAME.data.obstacles[i % window.GAME.data.obstacles.length],
         image: new Image(),
         opacity: Math.random() * 0.5 + 0.5,
-        dr: Math.random() - 0.5,
+        dr: Math.random() - 0.5
       };
-      items[i].image.src =
-        window.GAME.data.obstacles[i % window.GAME.data.obstacles.length].image;
+      items[i].image.src = window.GAME.data.obstacles[i % window.GAME.data.obstacles.length].image;
     }
 
     let count = 0;
@@ -107,16 +102,8 @@
         const item = items[i];
         item.x += item.dx;
         item.y += item.dy;
-        if (
-          item.x + item.dx < 0 ||
-          item.x + item.dx > window.innerWidth - item.sizex / 2
-        )
-          item.dx = -item.dx;
-        if (
-          item.y + item.dy < 0 ||
-          item.y + item.dy > window.innerHeight - item.sizey / 2
-        )
-          item.dy = -item.dy;
+        if (item.x + item.dx < 0 || item.x + item.dx > window.innerWidth - item.sizex / 2) item.dx = -item.dx;
+        if (item.y + item.dy < 0 || item.y + item.dy > window.innerHeight - item.sizey / 2) item.dy = -item.dy;
       }
       context.globalAlpha = 1;
       context.fillStyle = "#3c3c3c";
@@ -126,9 +113,7 @@
         const item = items[i];
         if (!(item.image.complete && item.image.naturalWidth)) continue;
         if (!item.sizey) {
-          item.sizey = round(
-            (item.image.naturalHeight * item.sizex) / item.image.naturalWidth
-          );
+          item.sizey = round((item.image.naturalHeight * item.sizex) / item.image.naturalWidth);
         }
         context.globalAlpha = item.opacity;
         context.translate(item.x, item.y);
@@ -156,8 +141,7 @@
       count++;
       if (second !== getSecond()) {
         second = getSecond();
-        fps.innerHTML =
-          count + "fps / " + (window.performance.now() - now) + "ms";
+        fps.innerHTML = count + "fps / " + (window.performance.now() - now) + "ms";
         count = 0;
       }
 
@@ -170,7 +154,7 @@
     const game1sound = new Howl({
       src: ["assets/game-1.webm", "assets/game-1.mp3"],
       loop: true,
-      volume: 1,
+      volume: 1
     });
     game1sound.play();
   };
@@ -187,14 +171,11 @@
     window.GAME.data.backgrounds.map(function (background) {
       document
         .getElementById("backgrounds")
-        .appendChild(
-          createElementFromHTML(
-            `<div><h3>${background.name}</h3><img src="${background.image}" /></div>`
-          )
-        );
+        .appendChild(createElementFromHTML(`<div><h3>${background.name}</h3><img src="${background.image}" /></div>`));
     });
-
+    let i = 0;
     window.GAME.data.obstacles.map(function (obstacle) {
+      i++;
       const imgAnimation = [];
       if (obstacle.rotation) {
         imgAnimation.push(`rotate ${obstacle.rotation}ms linear infinite`);
@@ -207,11 +188,9 @@
         imgAnimation.push(`hue-rotate ${obstacle.hue}ms linear infinite`);
       }
       const obstacleDom = createElementFromHTML(
-        `<div><h3>${
-          obstacle.name
-        }</h3><span style="animation: ${spanAnimation.join(", ")}"><img src="${
+        `<div><h3>${i} --- ${obstacle.name}</h3><span style="animation: ${spanAnimation.join(", ")}"><img src="${
           obstacle.image
-        }" style="animation: ${imgAnimation.join(", ")}" /></span></div>`
+        }" title="${obstacle.image}" style="animation: ${imgAnimation.join(", ")}" /></span></div>`
       );
       obstacleDom.querySelector("img").addEventListener("click", function () {
         obstacle.sound.play();
@@ -222,15 +201,11 @@
     window.GAME.data.players.map(function (player) {
       document
         .getElementById("players")
-        .appendChild(
-          createElementFromHTML(
-            `<div><h3>${player.name}</h3><img src="${player.image}" /></div>`
-          )
-        );
+        .appendChild(createElementFromHTML(`<div><h3>${player.name}</h3><img src="${player.image}" /></div>`));
     });
   };
 
-  playBackgroundMusic();
+  // playBackgroundMusic();
   renderLibrary();
 
   // canvas:

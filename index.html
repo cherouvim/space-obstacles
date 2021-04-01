@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=0.1,maximum-scale=5" />
     <!-- <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" /> -->
-    <meta name="theme-color" content="#000000">
-    <link rel="manifest" href="manifest.json">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="icon-192x192.png">
-    <link rel="icon" sizes="128x128" href="icon-192x192.png">
-    <meta name="application-name" content="Space Obstacles">
-    <meta name="description" content="Avoid all space obstacles. Move on to faster levels. Accumulate points. Have fun! 🚀">
-    <meta property="og:site_name" content="Space Obstacles">
-    <meta property="og:type" content="game">
-    <meta property="og:title" content="Space Obstacles">
-    <meta property="og:image" content="https://obstacles.space/icon-512x512.png">
-    <meta property="og:url" content="https://obstacles.space/">
-    <meta property="og:description" content="Avoid all space obstacles. Move on to faster levels. Accumulate points. Have fun! 🚀">
-    <meta name="twitter:creator" content="@cherouvim">
-    <meta name="twitter:image" content="https://obstacles.space/icon-512x512.png">
-    <link rel="canonical" href="https://obstacles.space/">
+    <meta name="theme-color" content="#000000" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="icon-192x192.png" />
+    <link rel="icon" sizes="128x128" href="icon-192x192.png" />
+    <meta name="application-name" content="Space Obstacles" />
+    <meta
+      name="description"
+      content="Avoid all space obstacles. Move on to faster levels. Accumulate points. Have fun! 🚀"
+    />
+    <meta property="og:site_name" content="Space Obstacles" />
+    <meta property="og:type" content="game" />
+    <meta property="og:title" content="Space Obstacles" />
+    <meta property="og:image" content="https://obstacles.space/icon-512x512.png" />
+    <meta property="og:url" content="https://obstacles.space/" />
+    <meta
+      property="og:description"
+      content="Avoid all space obstacles. Move on to faster levels. Accumulate points. Have fun! 🚀"
+    />
+    <meta name="twitter:creator" content="@cherouvim" />
+    <meta name="twitter:image" content="https://obstacles.space/icon-512x512.png" />
+    <link rel="canonical" href="https://obstacles.space/" />
     <title>Space Obstacles</title>
     <style>
       html {
@@ -75,7 +81,8 @@
         }
       }
       @keyframes translate {
-        0%, 100% {
+        0%,
+        100% {
           transform: translate(0px);
         }
         50% {
@@ -83,7 +90,8 @@
         }
       }
       @keyframes hue-rotate {
-        0%, 100% {
+        0%,
+        100% {
           filter: hue-rotate(0deg);
         }
         50% {
@@ -93,11 +101,12 @@
     </style>
   </head>
   <body>
-    <div id="content">
-    </div>
+    <div id="content"></div>
 
-    <script type="text/javascript" src="lib/howler.min.js"></script>    
-    <script type="text/javascript">window.GAME = {};</script>
+    <script type="text/javascript" src="lib/howler.min.js"></script>
+    <script type="text/javascript">
+      window.GAME = {};
+    </script>
     <script type="text/javascript" src="data.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="register-service-worker.js" defer></script>
@@ -105,9 +114,11 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7736FBJ5Z0"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-7736FBJ5Z0');
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-7736FBJ5Z0");
     </script>
   </body>
 </html>
