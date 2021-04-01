@@ -15,7 +15,7 @@
 
   // fps.
   const fps = createElementFromHTML(
-    `<span style="border: 1px solid red; background: green; position: fixed; top: 0; left: 0"></span>`
+    `<span style="opacity: 0.5; zoom: 3; border: 1px solid red; background: green; position: fixed; top: 0; left: 0"></span>`
   );
   document.getElementById("content").prepend(fps);
 
@@ -60,7 +60,7 @@
       count++;
       if (second !== getSecond()) {
         second = getSecond();
-        fps.innerHTML = count + "fps / " + (window.performance.now() - now) + "ms";
+        fps.innerHTML = count + "fps / " + (window.performance.now() - now).toFixed(4) + "ms";
         count = 0;
       }
 
@@ -141,7 +141,7 @@
       count++;
       if (second !== getSecond()) {
         second = getSecond();
-        fps.innerHTML = count + "fps / " + (window.performance.now() - now) + "ms";
+        fps.innerHTML = count + "fps / " + (window.performance.now() - now).toFixed(4) + "ms";
         count = 0;
       }
 
@@ -178,19 +178,25 @@
       i++;
       const imgAnimation = [];
       if (obstacle.rotation) {
-        imgAnimation.push(`rotate ${obstacle.rotation}ms linear infinite`);
+        imgAnimation.push(`rotate ${(100 / obstacle.rotation) * 1000}ms linear infinite`);
       }
       const spanAnimation = [];
       if (obstacle.speed) {
-        spanAnimation.push(`translate ${obstacle.speed}ms linear infinite`);
+        spanAnimation.push(`translate ${(100 / obstacle.speed) * 1000}ms linear infinite`);
       }
       if (obstacle.hue) {
-        imgAnimation.push(`hue-rotate ${obstacle.hue}ms linear infinite`);
+        imgAnimation.push(`hue-rotate ${(100 / obstacle.hue) * 1000}ms linear infinite`);
       }
       const obstacleDom = createElementFromHTML(
-        `<div><h3>${i} --- ${obstacle.name}</h3><span style="animation: ${spanAnimation.join(", ")}"><img src="${
-          obstacle.image
-        }" title="${obstacle.image}" style="animation: ${imgAnimation.join(", ")}" /></span></div>`
+        `<div><h3>${i}) ${obstacle.name} [<abbr title="size">S: ${obstacle.size}</abbr>, <abbr title="speed">s: ${
+          obstacle.speed
+        }</abbr>, <abbr title="rotation">r: ${obstacle.rotation}</abbr>, <abbr title="damage">d: ${
+          obstacle.damage
+        }</abbr>, <abbr title="hue">h: ${obstacle.hue}</abbr>]</h3><span style="animation: ${spanAnimation.join(
+          ", "
+        )}"><img src="${obstacle.image}" title="${obstacle.image}" style="animation: ${imgAnimation.join(
+          ", "
+        )}" /></span></div>`
       );
       obstacleDom.querySelector("img").addEventListener("click", function () {
         obstacle.sound.play();
