@@ -1,7 +1,27 @@
 (function (undefined) {
   "use strict";
 
-  // All properties should be integers 0 to 100.
+  /**
+   * Data rules:
+   * 1) The hypothetically square virtual board is 100x100 pixels.
+   * This means that:
+   * - for a screen resolution of 1024x768 (HDTV), the visible virtual board is 100x75 pixels.
+   * - for a screen resolution of 1080x2160 (PIXEL 3), the visible virtual board is 50x100 pixels.
+   * 2) All object properties should be integers 0 to 100. Some properties allow values to go above 100.
+   * This means the following for properties:
+   * - size: a square obstacle of size 100 will render 100x100 virtual pixels, which on PIXEL 3 would mean 2160x2160 pixels.
+   * - size: a square obstacle of size 50 will render 50x50 virtual pixels, which on PIXEL 3 would mean 1080x1080 pixels.
+   * - speed: an obstacle with speed 100 will require 1 second to move 100 virtual pixels.
+   * - speed: an obstacle with speed 25 will require 4 second2 to move 100 virtual pixels.
+   * - speed: an obstacle with speed 100 will require 1 second to move 100 virtual pixels.
+   * - rotation: an obstacle with rotation 0 does not rotate.
+   * - rotation: an obstacle with rotation 100 will require 1 second to rotate 360 degrees.
+   * - rotation: an obstacle with rotation 200 will require 0.5 second to rotate 360 degrees.
+   * - damage: an obstacle with damage 100 will imediatelly kill the player.
+   * - damage: an obstacle with damage 50 will remove 50% of the player's health.
+   * - hue: an obstacle with hue 0 does not change its hue (palette).
+   * - hue: an obstacle with hue 5 will require 20 seconds to fully rotate its hue (palette).
+   */
 
   window.GAME.data = {};
 
