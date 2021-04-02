@@ -80,11 +80,11 @@
     const items = [];
     for (let i = 0; i < itemsCount; i++) {
       items[i] = {
-        x: 0,
-        y: 0,
-        dx: Math.random() * 4,
-        dy: Math.random() * 4,
-        sizex: round(Math.random() * 40 + 40),
+        x: canvas.width / 2,
+        y: canvas.height / 2,
+        dx: Math.random() * 6 - 3,
+        dy: Math.random() * 6 - 3,
+        sizex: round(Math.random() * 100 + 50),
         data: window.GAME.data.obstacles[i % window.GAME.data.obstacles.length],
         image: new Image(),
         opacity: Math.random() * 0.5 + 0.5,
@@ -127,12 +127,7 @@
         );
         // context.strokeStyle = "#ff0000";
         // context.beginPath();
-        // context.rect(
-        //   item.sizex / 2 - item.sizex,
-        //   item.sizey / 2 - item.sizey,
-        //   item.sizex,
-        //   item.sizey
-        // );
+        // context.rect(item.sizex / 2 - item.sizex, item.sizey / 2 - item.sizey, item.sizex, item.sizey);
         // context.stroke();
         context.translate(-item.x, -item.y);
         context.setTransform(1, 0, 0, 1, 0, 0);
@@ -224,6 +219,6 @@
   // demoHtml(100); // 40 fps mobile, 40 fps pc.
   // demoHtml(300); // 13 fps pc
   // demoCanvas(10);
-  demoCanvas(100); // 60 fps mobile, 50 fps pc!
+  demoCanvas(50); // 60 fps mobile, 50 fps pc!
   // demoCanvas(300); // 60 fps
 })();
