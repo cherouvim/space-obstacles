@@ -9,7 +9,6 @@
   };
 
   const round = Math.round;
-  // const round = (a) => a;
 
   const getSecond = () => Math.floor(new Date().getTime() / 1000);
 
@@ -18,56 +17,6 @@
     `<span style="opacity: 0.5; zoom: 3; border: 1px solid red; background: green; position: fixed; top: 0; left: 0"></span>`
   );
   document.getElementById("content").prepend(fps);
-
-  const demoHtml = itemsCount => {
-    const items = [];
-    for (let i = 0; i < itemsCount; i++) {
-      const size = Math.random() * 40 + 50;
-      items[i] = {
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        dx: Math.random() * 4,
-        dy: Math.random() * 4,
-        size: size,
-        data: window.GAME.data.obstacles[i % window.GAME.data.obstacles.length],
-        elem: createElementFromHTML(
-          `<img width="${size}px" src="${
-            window.GAME.data.obstacles[i % window.GAME.data.obstacles.length].image
-          }" style="position: absolute; opacity: ${Math.random()}" />`
-        )
-      };
-      document.getElementById("content").appendChild(items[i].elem);
-    }
-
-    let count = 0;
-    let second = getSecond();
-    function animate(timestamp) {
-      const now = window.performance.now();
-
-      for (let i = 0; i < itemsCount; i++) {
-        const item = items[i];
-        item.x += item.dx;
-        item.y += item.dy;
-        if (item.x < 0 || item.x > window.innerWidth - item.size * 2) item.dx = -item.dx;
-        if (item.y < 0 || item.y > window.innerHeight - item.size - 100) item.dy = -item.dy;
-      }
-      for (let i = 0; i < itemsCount; i++) {
-        const item = items[i];
-        item.elem.style.left = round(item.x) + "px";
-        item.elem.style.top = round(item.y) + "px";
-      }
-
-      count++;
-      if (second !== getSecond()) {
-        second = getSecond();
-        fps.innerHTML = count + "fps / " + (window.performance.now() - now).toFixed(4) + "ms";
-        count = 0;
-      }
-
-      window.requestAnimationFrame(animate);
-    }
-    window.requestAnimationFrame(animate);
-  };
 
   const demoCanvas = itemsCount => {
     const canvas = createElementFromHTML(`<canvas></canvas>`);
@@ -208,17 +157,5 @@
 
   // playBackgroundMusic();
   renderLibrary();
-
-  // canvas:
-  // + speed
-  // - lower level
-  // - no css tricks
-  // - no zoom detail (don't need it)
-  // - no DOM events on elements (don't need it)
-  // demoHtml(10);
-  // demoHtml(100); // 40 fps mobile, 40 fps pc.
-  // demoHtml(300); // 13 fps pc
-  // demoCanvas(10);
-  demoCanvas(50); // 60 fps mobile, 50 fps pc!
-  // demoCanvas(300); // 60 fps
+  demoCanvas(50);
 })();
