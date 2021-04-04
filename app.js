@@ -140,11 +140,36 @@
           ", "
         )}"><img src="${obstacle.image}" title="${obstacle.image}" style="animation: ${imgAnimation.join(
           ", "
-        )}" /></span></div>`
+        )}" /></span><canvas style="margin-top: 100px"></canvas></div>`
       );
       obstacleDom.querySelector("img").addEventListener("click", function () {
         obstacle.sound.play();
       });
+      const canvas = obstacleDom.querySelector("canvas");
+      const context = canvas.getContext("2d");
+      canvas.width = (window.innerWidth / 100) * obstacle.size;
+      canvas.height = round((canvas.width * obstacle.imageHeight) / obstacle.imageWidth);
+      context.drawImage(obstacle.imageElement, 0, 0, canvas.width, canvas.height);
+
+      context.beginPath();
+      context.arc(
+        canvas.width / 2,
+        canvas.height / 2,
+        ((obstacle.radius / 2) * canvas.width) / 100,
+        0,
+        2 * Math.PI,
+        false
+      );
+      context.lineWidth = 1;
+      context.strokeStyle = "#ffff00";
+      context.globalAlpha = 0.5;
+      context.stroke();
+      context.beginPath();
+      context.moveTo(canvas.width / 2, 0);
+      context.lineTo(canvas.width / 2, canvas.height);
+      context.moveTo(0, canvas.height / 2);
+      context.lineTo(canvas.width, canvas.height / 2);
+      context.stroke();
       document.getElementById("obstacles").appendChild(obstacleDom);
     });
 
@@ -155,7 +180,51 @@
     });
   };
 
-  // playBackgroundMusic();
-  renderLibrary();
-  demoCanvas(50);
+  const loadImages = (onImageLoad, onImageError, onAllImagesLoaded) => {
+    let loadedImages = 0;
+    const itemsWithImages = [].concat(
+      window.GAME.data.backgrounds,
+      window.GAME.data.obstacles,
+      window.GAME.data.players
+    );
+    const totalImages = itemsWithImages.length;
+    itemsWithImages.map(item => {
+      item.imageElement = new Image();
+      item.imageElement.onload = () => {
+        item.imageWidth = item.imageElement.naturalWidth;
+        item.imageHeight = item.imageElement.naturalHeight;
+        loadedImages++;
+        onImageLoad(Math.floor((loadedImages / totalImages) * 100));
+
+        if (loadedImages === totalImages) onAllImagesLoaded();
+      };
+      item.imageElement.onerror = () => {
+        console.log("ERROR loading image");
+        onImageError();
+      };
+      item.imageElement.src = item.image;
+    });
+  };
+
+  const displayPercentLoader = percent => {
+    console.log("Loading: " + percent + "%");
+  };
+
+  const displayErrorAndRetryButton = () => {
+    console.log("Error. Please try again");
+    // setTimeout(() => {
+    //   loadImages(displayPercentLoader, displayErrorAndRetryButton, startGame);
+    // }, 1000);
+  };
+
+  const startGame = () => {
+    console.log("start game");
+    console.log(window.GAME.data.backgrounds);
+    // playBackgroundMusic();
+    renderLibrary();
+
+    // demoCanvas(50);
+  };
+
+  loadImages(displayPercentLoader, displayErrorAndRetryButton, startGame);
 })();
