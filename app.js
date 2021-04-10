@@ -218,8 +218,10 @@
   };
 
   const startGame = () => {
+    console.log("backgrounds", window.GAME.data.backgrounds);
+    console.log("obstacles", window.GAME.data.obstacles);
+    console.log("players", window.GAME.data.players);
     console.log("start game");
-    console.log(window.GAME.data.backgrounds);
     // playBackgroundMusic();
     renderLibrary();
 
