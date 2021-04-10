@@ -326,7 +326,7 @@
     {
       name: "bad-red-bomb",
       image: "assets/katerina-bad-red-bomb.png",
-      radius: 90,
+      radius: 82,
       size: 10,
       sound: new Howl({
         src: ["assets/katerina-bad-red-bomb.webm", "assets/katerina-bad-red-bomb.mp3"]
@@ -339,7 +339,7 @@
     {
       name: "bad-spaceship",
       image: "assets/katerina-bad-spaceship.png",
-      radius: 90,
+      radius: 85,
       size: 10,
       sound: new Howl({
         src: ["assets/katerina-bad-spaceship.webm", "assets/katerina-bad-spaceship.mp3"]
@@ -352,7 +352,7 @@
     {
       name: "bad-star",
       image: "assets/katerina-bad-star.png",
-      radius: 85,
+      radius: 80,
       size: 10,
       sound: new Howl({
         src: ["assets/katerina-bad-star.webm", "assets/katerina-bad-star.mp3"]
@@ -378,7 +378,7 @@
     {
       name: "bad-bean-meteor",
       image: "assets/orestis-bad-bean-meteor.png",
-      radius: 85,
+      radius: 80,
       size: 10,
       sound: new Howl({
         src: ["assets/orestis-bad-bean-meteor.webm", "assets/orestis-bad-bean-meteor.mp3"]
@@ -391,7 +391,7 @@
     {
       name: "bad-hairy-salamandra",
       image: "assets/orestis-bad-hairy-salamandra.png",
-      radius: 100,
+      radius: 90,
       size: 10,
       sound: new Howl({
         src: ["assets/orestis-bad-hairy-salamandra.webm", "assets/orestis-bad-hairy-salamandra.mp3"]
@@ -404,7 +404,7 @@
     {
       name: "bad-tsouhtra",
       image: "assets/orestis-bad-tsouhtra.png",
-      radius: 130,
+      radius: 125,
       size: 10,
       sound: new Howl({
         src: ["assets/orestis-bad-tsouhtra.webm", "assets/orestis-bad-tsouhtra.mp3"]
@@ -430,7 +430,7 @@
     {
       name: "bad-spaceship-with-ants",
       image: "assets/orestis-bad-spaceship-with-ants.png",
-      radius: 100,
+      radius: 95,
       size: 10,
       sound: new Howl({
         src: ["assets/orestis-bad-spaceship-with-ants.webm", "assets/orestis-bad-spaceship-with-ants.mp3"]
@@ -443,7 +443,7 @@
     {
       name: "bad-spaceship-with-astronauts",
       image: "assets/orestis-bad-spaceship-with-astronauts.png",
-      radius: 100,
+      radius: 90,
       size: 10,
       sound: new Howl({
         src: ["assets/orestis-bad-spaceship-with-astronauts.webm", "assets/orestis-bad-spaceship-with-astronauts.mp3"]
