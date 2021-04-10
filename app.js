@@ -174,9 +174,33 @@
     });
 
     window.GAME.data.players.map(function (player) {
-      document
-        .getElementById("players")
-        .appendChild(createElementFromHTML(`<div><h3>${player.name}</h3><img src="${player.image}" /></div>`));
+      const playerDom = createElementFromHTML(`<div><h3>${player.name}</h3><canvas></canvas></div>`);
+      const canvas = playerDom.querySelector("canvas");
+      const context = canvas.getContext("2d");
+      canvas.width = (window.innerWidth / 100) * player.size;
+      canvas.height = round((canvas.width * player.imageHeight) / player.imageWidth);
+      context.drawImage(player.imageElement, 0, 0, canvas.width, canvas.height);
+
+      context.beginPath();
+      context.arc(
+        canvas.width / 2,
+        canvas.height / 2,
+        ((player.radius / 2) * canvas.width) / 100,
+        0,
+        2 * Math.PI,
+        false
+      );
+      context.lineWidth = 1;
+      context.strokeStyle = "#ffff00";
+      context.globalAlpha = 0.5;
+      context.stroke();
+      context.beginPath();
+      context.moveTo(canvas.width / 2, 0);
+      context.lineTo(canvas.width / 2, canvas.height);
+      context.moveTo(0, canvas.height / 2);
+      context.lineTo(canvas.width, canvas.height / 2);
+      context.stroke();
+      document.getElementById("players").appendChild(playerDom);
     });
   };
 

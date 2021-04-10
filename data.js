@@ -459,25 +459,25 @@
     {
       name: "player-medusa",
       image: "assets/iasonas-player-medusa.png",
-      size: 8,
-      radius: 85
+      size: 6,
+      radius: 90
     },
     {
       name: "player-diplomatos",
       image: "assets/iasonas-player-diplomatos.png",
-      size: 8,
-      radius: 85
+      size: 6,
+      radius: 90
     },
     {
       name: "player-eksoheros",
       image: "assets/iasonas-player-eksoheros.png",
-      size: 8,
-      radius: 85
+      size: 7,
+      radius: 95
     },
     {
       name: "player-hromatistopodos",
       image: "assets/iasonas-player-hromatistopodos.png",
-      size: 8,
+      size: 7,
       radius: 85
     },
     {
@@ -495,7 +495,7 @@
     {
       name: "player-space-cockroach",
       image: "assets/orestis-player-space-cockroach.png",
-      size: 8,
+      size: 9,
       radius: 85
     }
   ];
