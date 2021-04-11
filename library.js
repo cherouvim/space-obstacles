@@ -55,7 +55,7 @@
         if (item.y + item.dy < 0 || item.y + item.dy > window.innerHeight - item.sizey / 2) item.dy = -item.dy;
       }
       context.globalAlpha = 1;
-      context.fillStyle = "#222";
+      context.fillStyle = "#111";
       context.fillRect(0, 0, window.innerWidth, window.innerHeight);
 
       for (let i = 0; i < itemsCount; i++) {

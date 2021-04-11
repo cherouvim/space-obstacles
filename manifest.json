@@ -3,7 +3,7 @@
   "short_name": "Space Obstacles",
   "description": "Avoid all space obstacles. Move on to faster levels. Accumulate points. Have fun! 🚀",
   "theme_color": "#000000",
-  "background_color": "#222",
+  "background_color": "#111",
   "display": "fullscreen",
   "orientation": "landscape",
   "scope": "/",

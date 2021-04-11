@@ -2,7 +2,7 @@
   "use strict";
 
   const MAX_CANVAS_SIZE = 1200;
-  const BACKGROUND_COLOR = "#222";
+  const BACKGROUND_COLOR = "#111";
 
   // utils.
   const createElementFromHTML = htmlString => {
