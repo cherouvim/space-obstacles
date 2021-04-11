@@ -96,7 +96,9 @@
       count++;
       if (second !== getSecond()) {
         second = getSecond();
-        fps.innerHTML = count + "fps / " + (window.performance.now() - now).toFixed(4) + "ms";
+        fps.innerHTML = `${count} fps / ${(window.performance.now() - now).toFixed(4)}ms window: ${window.innerWidth}x${
+          window.innerHeight
+        } canvas: ${width}x${height}`;
         count = 0;
       }
 
