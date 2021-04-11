@@ -1,11 +1,11 @@
 TODOs
-- input rotations, speeds, pallete rotations etc
-- adjust graphics sizes on files? or setup size on data?
 - calculate game screen (max X, Y -> resize/scale canvas on more than that, or simply center a bounded box).
-- implement x, y & rotate movement based on time
-- implement sizex, sizey based on canvas size
-- optimize graphics (png 256 alpha contains extra photo at the corners???)
-- webp
+- mouse/touch hangler
+- paralax scrolling
+- loader UI
+- scores/health UI
+- enemies
+- levels
 
 IMPROVE
 - favicon
@@ -15,6 +15,7 @@ IMPROVE
 
 MAYBE/FUTURE
 - use cloudflare
+- webp
 
 NO/IGNORE
 - github link
@@ -23,3 +24,8 @@ NO/IGNORE
 DONE
 - evaluate a sound engine (volume, mix, play pause)
 - sounds
+- input rotations, speeds, pallete rotations etc
+- adjust graphics sizes on files? or setup size on data?
+- optimize graphics (png 256 alpha contains extra photo at the corners???)
+- implement x, y & rotate movement based on time
+- implement sizex, sizey based on canvas size
