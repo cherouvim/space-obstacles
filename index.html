@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+    />
     <meta name="theme-color" content="#000000" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
@@ -26,102 +29,17 @@
     <meta name="twitter:image" content="https://obstacles.space/icon-512x512.png" />
     <link rel="canonical" href="https://obstacles.space/" />
     <title>Space Obstacles</title>
-    <style>
-      html {
-        user-select: none;
-        margin: 0;
-        padding: 0;
-        background: #3c3c3c;
-      }
-      body {
-        margin: 0;
-        padding: 0;
-        position: relative;
-        /* overflow: hidden; */
-      }
-      #content {
-        /* position: absolute; */
-        margin: 0;
-        padding: 0;
-        left: 0;
-        top: 0;
-        /* width: 100%; */
-        /* height: 100%; */
-        clear: both;
-        color: white;
-      }
-      canvas {
-        clear: both;
-        border: 1px dotted yellow;
-      }
-      /* h3, br {
-        display: none;
-      }
-      img {
-        zoom: 0.5;
-      } */
-      fieldset {
-        float: left;
-        width: 30%;
-      }
-      fieldset div {
-        min-height: 9em;
-      }
-      fieldset span {
-        position: absolute;
-      }
-      fieldset abbr {
-        text-decoration: none;
-        cursor: help;
-      }
-      fieldset img {
-        max-width: 5em;
-      }
-      fieldset#obstacles img {
-        cursor: pointer;
-      }
-      fieldset#obstacles img:hover {
-        filter: brightness(1.5);
-      }
-      @keyframes rotate {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-      @keyframes translate {
-        0%,
-        100% {
-          transform: translate(0px);
-        }
-        50% {
-          transform: translate(200px);
-        }
-      }
-      @keyframes hue-rotate {
-        0%,
-        100% {
-          filter: hue-rotate(0deg);
-        }
-        50% {
-          filter: hue-rotate(360deg);
-        }
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/app.css" />
   </head>
   <body>
     <div id="content"></div>
-
-    <script type="text/javascript" src="/lib/howler.min.js"></script>
     <script type="text/javascript">
       window.GAME = {};
     </script>
+    <script type="text/javascript" src="/lib/howler.min.js"></script>
     <script type="text/javascript" src="/data.js"></script>
     <script type="text/javascript" src="/app.js"></script>
     <script type="text/javascript" src="/register-service-worker.js" defer></script>
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7736FBJ5Z0"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
