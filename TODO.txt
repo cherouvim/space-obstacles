@@ -9,8 +9,6 @@ TODOs
 
 IMPROVE
 - favicon
-- manifest.json metadata
-- SEO metatags
 - conditional rounding (rounding vs no rounding [subpixel rendering]) based on performance
 
 MAYBE/FUTURE
@@ -22,6 +20,8 @@ NO/IGNORE
 - splash screen
 
 DONE
+- manifest.json metadata
+- SEO metatags
 - evaluate a sound engine (volume, mix, play pause)
 - sounds
 - input rotations, speeds, pallete rotations etc
