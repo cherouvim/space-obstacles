@@ -1,6 +1,8 @@
 (function (undefined) {
   "use strict";
 
+  window.GAME = {};
+
   /**
    * Data rules:
    * 1) The hypothetically square virtual board is 100x100 pixels.
