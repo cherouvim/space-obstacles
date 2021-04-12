@@ -22,36 +22,45 @@
   document.getElementById("content").prepend(fps);
 
   const demoCanvas = itemsCount => {
-    const width = min(MAX_CANVAS_SIZE, window.innerWidth);
-    const height = min(MAX_CANVAS_SIZE, window.innerHeight);
+    const pixelRatio = window.devicePixelRatio || 1;
+    const width = min(MAX_CANVAS_SIZE, window.innerWidth) * pixelRatio;
+    const height = min(MAX_CANVAS_SIZE, window.innerHeight) * pixelRatio;
+    const cssWidth = min(MAX_CANVAS_SIZE, window.innerWidth);
+    const cssHeight = min(MAX_CANVAS_SIZE, window.innerHeight);
 
-    const canvas = createElementFromHTML(`<canvas></canvas>`);
-    document.getElementById("content").append(canvas);
+    const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
 
-    canvas.width = width;
-    canvas.height = height;
+    canvas.width = width; // The actual pixels rendered through this canvas.
+    canvas.height = height; // The actual pixels rendered through this canvas.
+    canvas.style.width = cssWidth + "px";
+    canvas.style.height = cssHeight + "px";
+    // context.imageSmoothingEnabled = false;
     if (MAX_CANVAS_SIZE < window.innerWidth) {
       canvas.style.marginLeft = round((window.innerWidth - MAX_CANVAS_SIZE) / 2) + "px";
     }
     if (MAX_CANVAS_SIZE < window.innerHeight) {
       canvas.style.marginTop = round((window.innerHeight - MAX_CANVAS_SIZE) / 2) + "px";
     }
+    document.getElementById("content").append(canvas);
 
     const items = [];
     for (let i = 0; i < itemsCount; i++) {
+      const obstacle = window.GAME.data.obstacles[i % window.GAME.data.obstacles.length];
+
       items[i] = {
         x: width / 2,
         y: height / 2,
         dx: random() * 6 - 3,
         dy: random() * 6 - 3,
-        sizex: round(random() * 100 + 50),
-        data: window.GAME.data.obstacles[i % window.GAME.data.obstacles.length],
+        sizex: round((width / 100) * obstacle.size),
+        data: obstacle,
         image: new Image(),
-        opacity: random() * 0.5 + 0.5,
-        dr: random() - 0.5
+        opacity: 1,
+        dr: random() - 0.5,
+        radiusPixels: round(width * (obstacle.size / 100) * (obstacle.radius / 100)) / 2
       };
-      items[i].image.src = window.GAME.data.obstacles[i % window.GAME.data.obstacles.length].image;
+      items[i].image.src = obstacle.image;
     }
 
     let count = 0;
@@ -63,12 +72,14 @@
         const item = items[i];
         item.x += item.dx;
         item.y += item.dy;
-        if (item.x + item.dx < 0 || item.x + item.dx > window.innerWidth - item.sizex / 2) item.dx = -item.dx;
-        if (item.y + item.dy < 0 || item.y + item.dy > window.innerHeight - item.sizey / 2) item.dy = -item.dy;
+        if (item.x - item.radiusPixels + item.dx < 0 || item.x + item.radiusPixels + item.dx > width)
+          item.dx = -item.dx;
+        if (item.y - item.radiusPixels + item.dy < 0 || item.y + item.radiusPixels + item.dy > height)
+          item.dy = -item.dy;
       }
       context.globalAlpha = 1;
       context.fillStyle = BACKGROUND_COLOR;
-      context.fillRect(0, 0, window.innerWidth, window.innerHeight);
+      context.fillRect(0, 0, width, height);
 
       for (let i = 0; i < itemsCount; i++) {
         const item = items[i];
@@ -98,7 +109,7 @@
         second = getSecond();
         fps.innerHTML = `${count} fps / ${(window.performance.now() - now).toFixed(4)}ms window: ${window.innerWidth}x${
           window.innerHeight
-        } canvas: ${width}x${height}`;
+        } canvas: ${width}x${height} pixel ratio: ${pixelRatio}`;
         count = 0;
       }
 
