@@ -57,7 +57,6 @@
         data: obstacle,
         image: new Image(),
         opacity: 1,
-        dr: random() - 0.5,
         radiusPixels: round(width * (obstacle.size / 100) * (obstacle.radius / 100)) / 2
       };
       items[i].image.src = obstacle.image;
@@ -76,7 +75,7 @@
           item.dx = -item.dx;
         if (item.y - item.radiusPixels + item.dy < 0 || item.y + item.radiusPixels + item.dy > height)
           item.dy = -item.dy;
-        if (i < 5) item.opacity = timestamp % 500 < 250 ? 1 : 0.5; // blink
+        // item.opacity = timestamp % 500 < 250 ? 1 : 0.5; // blink
       }
       context.fillStyle = BACKGROUND_COLOR;
       context.fillRect(0, 0, width, height);
@@ -89,7 +88,8 @@
         }
         context.globalAlpha = item.opacity;
         context.translate(item.x, item.y);
-        context.rotate((timestamp / 100) * item.dr);
+        if (item.data.rotation)
+          context.rotate((((((timestamp * 360) / 1000) * item.data.rotation) / 100) * Math.PI) / 180);
         if (item.opacity < 1) context.globalAlpha = item.opacity;
         context.drawImage(
           item.image,
