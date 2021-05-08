@@ -73,7 +73,7 @@
       speed: 100,
       rotation: 15,
       damage: 40,
-      hue: 25
+      hue: 100
     },
     {
       name: "bad-creature-with-thorns",

@@ -90,6 +90,7 @@
         context.translate(item.x, item.y);
         if (item.data.rotation)
           context.rotate((((((timestamp * 360) / 1000) * item.data.rotation) / 100) * Math.PI) / 180);
+        if (item.data.hue) context.filter = "hue-rotate(" + (((timestamp * 360) / 1000) * item.data.hue) / 100 + "deg)";
         if (item.opacity < 1) context.globalAlpha = item.opacity;
         context.drawImage(
           item.image,
@@ -99,6 +100,7 @@
           round(item.sizey)
         );
         if (item.opacity < 1) context.globalAlpha = 1;
+        if (item.data.hue) context.filter = "hue-rotate(0deg)";
         // context.strokeStyle = "#ff0000";
         // context.beginPath();
         // context.rect(item.sizex / 2 - item.sizex, item.sizey / 2 - item.sizey, item.sizex, item.sizey);
