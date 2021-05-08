@@ -76,8 +76,8 @@
           item.dx = -item.dx;
         if (item.y - item.radiusPixels + item.dy < 0 || item.y + item.radiusPixels + item.dy > height)
           item.dy = -item.dy;
+        if (i < 5) item.opacity = timestamp % 500 < 250 ? 1 : 0.5; // blink
       }
-      context.globalAlpha = 1;
       context.fillStyle = BACKGROUND_COLOR;
       context.fillRect(0, 0, width, height);
 
@@ -90,6 +90,7 @@
         context.globalAlpha = item.opacity;
         context.translate(item.x, item.y);
         context.rotate((timestamp / 100) * item.dr);
+        if (item.opacity < 1) context.globalAlpha = item.opacity;
         context.drawImage(
           item.image,
           round(item.sizex / 2 - item.sizex),
@@ -97,6 +98,7 @@
           round(item.sizex),
           round(item.sizey)
         );
+        if (item.opacity < 1) context.globalAlpha = 1;
         // context.strokeStyle = "#ff0000";
         // context.beginPath();
         // context.rect(item.sizex / 2 - item.sizex, item.sizey / 2 - item.sizey, item.sizex, item.sizey);
