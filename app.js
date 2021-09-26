@@ -21,6 +21,9 @@
   );
   document.getElementById("content").prepend(fps);
 
+  const loader = createElementFromHTML(`<div id="loader" style="display: none"></span>`);
+  document.getElementById("content").prepend(loader);
+
   const demoCanvas = itemsCount => {
     const pixelRatio = window.devicePixelRatio || 1;
     const width = min(MAX_CANVAS_SIZE, window.innerWidth) * pixelRatio;
@@ -150,6 +153,8 @@
 
   const displayPercentLoader = percent => {
     console.log("Loading: " + percent + "%");
+    loader.innerHTML = percent + "%";
+    loader.style.display = percent < 100 ? "block" : "none";
   };
 
   const displayErrorAndRetryButton = () => {

@@ -9,6 +9,7 @@ body {
   padding: 0;
   position: relative;
   overflow: hidden;
+  font-family: sans-serif;
 }
 #content {
   position: absolute;
@@ -20,4 +21,12 @@ body {
   height: 100%;
 }
 canvas {
+}
+#loader {
+  font-size: 7vw;
+  color: #dcb9d4;
+  position: absolute;
+  top: 45vh;
+  left: 45%;
+  filter: drop-shadow(0 0 0.75rem #aa2);
 }

@@ -2,7 +2,6 @@ TODOs
 - calculate game screen (max X, Y -> resize/scale canvas on more than that, or simply center a bounded box).
 - mouse/touch handler
 - paralax scrolling
-- loader UI
 - scores/health UI
 - enemies
 - levels
@@ -20,6 +19,7 @@ NO/IGNORE
 - splash screen
 
 DONE
+- loader UI
 - manifest.json metadata
 - SEO metatags
 - evaluate a sound engine (volume, mix, play pause)
