@@ -1,6 +1,6 @@
 TODOs
 - calculate game screen (max X, Y -> resize/scale canvas on more than that, or simply center a bounded box).
-- mouse/touch hangler
+- mouse/touch handler
 - paralax scrolling
 - loader UI
 - scores/health UI
