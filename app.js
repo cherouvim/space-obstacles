@@ -21,8 +21,11 @@
   );
   document.getElementById("content").prepend(fps);
 
-  const loader = createElementFromHTML(`<div id="loader" style="display: none"></span>`);
+  const loader = createElementFromHTML(`<div id="loader" style="display: none"></div>`);
   document.getElementById("content").prepend(loader);
+
+  const message = createElementFromHTML(`<div id="message" style="display: none"></div>`);
+  document.getElementById("content").prepend(message);
 
   const demoCanvas = itemsCount => {
     const pixelRatio = window.devicePixelRatio || 1;
@@ -125,40 +128,63 @@
     window.requestAnimationFrame(animate);
   };
 
-  const loadImages = (onImageLoad, onImageError, onAllImagesLoaded) => {
-    let loadedImages = 0;
+  const loadAssets = (onAssetLoad, onAssetLoadError, onAllAssetsLoaded) => {
+    let loadedAssets = 0;
     const itemsWithImages = [].concat(
       window.GAME.data.backgrounds,
       window.GAME.data.obstacles,
       window.GAME.data.players
     );
-    const totalImages = itemsWithImages.length;
+    const itemsWithSounds = [].concat(window.GAME.data.obstacles);
+    const totalAssets = itemsWithImages.length + itemsWithSounds.length;
     itemsWithImages.map(item => {
       item.imageElement = new Image();
       item.imageElement.onload = () => {
         item.imageWidth = item.imageElement.naturalWidth;
         item.imageHeight = item.imageElement.naturalHeight;
-        loadedImages++;
-        onImageLoad(floor((loadedImages / totalImages) * 100));
+        loadedAssets++;
+        onAssetLoad(floor((loadedAssets / totalAssets) * 100));
 
-        if (loadedImages === totalImages) onAllImagesLoaded();
+        if (loadedAssets === totalAssets) onAllAssetsLoaded();
       };
       item.imageElement.onerror = () => {
         console.log("ERROR loading image");
-        onImageError();
+        onAssetLoadError();
       };
       item.imageElement.src = item.image;
+    });
+    itemsWithSounds.map(item => {
+      item.sound = new Howl({
+        ...item.sound,
+        onload: () => {
+          loadedAssets++;
+          onAssetLoad(floor((loadedAssets / totalAssets) * 100));
+          if (loadedAssets === totalAssets) onAllAssetsLoaded();
+        },
+        onloaderror: () => {
+          console.log("ERROR loading sound");
+          onAssetLoadError();
+        }
+      });
     });
   };
 
   const displayPercentLoader = percent => {
     console.log("Loading: " + percent + "%");
     loader.innerHTML = percent + "%";
-    loader.style.display = percent < 100 ? "block" : "none";
+    if (percent === 0) {
+      loader.style.display = "block";
+    }
+    if (percent === 100) {
+      loader.style.opacity = 0;
+      setTimeout(() => loader.style.display = 'none', 1000);
+    }
   };
 
   const displayErrorAndRetryButton = () => {
     console.log("Error. Please try again");
+    message.innerHTML = 'Error loading assets &#x1F631. Please <a href="/">try again!</a>';
+    message.style.display = "block";
   };
 
   const startGame = () => {
@@ -167,5 +193,6 @@
     demoCanvas(50);
   };
 
-  loadImages(displayPercentLoader, displayErrorAndRetryButton, startGame);
+  displayPercentLoader(0);
+  loadAssets(displayPercentLoader, displayErrorAndRetryButton, startGame);
 })();

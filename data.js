@@ -67,9 +67,9 @@
       image: "assets/iasonas-bad-big-alien-8-legs-5-hands.png",
       radius: 115,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/iasonas-bad-big-alien-8-legs-5-hands.webm", "assets/iasonas-bad-big-alien-8-legs-5-hands.mp3"]
-      }),
+      },
       speed: 100,
       rotation: 15,
       damage: 40,
@@ -80,9 +80,9 @@
       image: "assets/iasonas-bad-creature-with-thorns.png",
       radius: 100,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/iasonas-bad-creature-with-thorns.webm", "assets/iasonas-bad-creature-with-thorns.mp3"]
-      }),
+      },
       speed: 33,
       rotation: 0,
       damage: 0,
@@ -93,9 +93,9 @@
       image: "assets/iasonas-bad-flame-ball.png",
       radius: 45,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/iasonas-bad-flame-ball.webm", "assets/iasonas-bad-flame-ball.mp3"]
-      }),
+      },
       speed: 30,
       rotation: 500,
       damage: 10,
@@ -106,9 +106,9 @@
       image: "assets/iasonas-bad-humanoid-creature.png",
       radius: 80,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/iasonas-bad-humanoid-creature.webm", "assets/iasonas-bad-humanoid-creature.mp3"]
-      }),
+      },
       speed: 45,
       rotation: 0,
       damage: 5,
@@ -119,9 +119,9 @@
       image: "assets/iasonas-bad-katsarida.png",
       radius: 35,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/iasonas-bad-katsarida.webm", "assets/iasonas-bad-katsarida.mp3"]
-      }),
+      },
       speed: 20,
       rotation: 1,
       damage: 3,
@@ -132,9 +132,9 @@
       image: "assets/iasonas-bad-meteor-cloud.png",
       radius: 90,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/iasonas-bad-meteor-cloud.webm", "assets/iasonas-bad-meteor-cloud.mp3"]
-      }),
+      },
       speed: 50,
       rotation: 0,
       damage: 3,
@@ -145,9 +145,9 @@
       image: "assets/iasonas-bad-meteor-cutter.png",
       radius: 60,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/iasonas-bad-meteor-cutter.webm", "assets/iasonas-bad-meteor-cutter.mp3"]
-      }),
+      },
       speed: 60,
       rotation: 0,
       damage: 3,
@@ -158,9 +158,9 @@
       image: "assets/iasonas-bad-meteor-with-shields.png",
       radius: 90,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/iasonas-bad-meteor-with-shields.webm", "assets/iasonas-bad-meteor-with-shields.mp3"]
-      }),
+      },
       speed: 30,
       rotation: 0,
       damage: 7,
@@ -171,9 +171,9 @@
       image: "assets/iasonas-bad-flaming-ice.png",
       radius: 75,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/iasonas-bad-flaming-ice.webm", "assets/iasonas-bad-flaming-ice.mp3"]
-      }),
+      },
       speed: 20,
       rotation: 10,
       damage: 3,
@@ -184,9 +184,9 @@
       image: "assets/iasonas-bad-rocket.png",
       radius: 120,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/iasonas-bad-rocket.webm", "assets/iasonas-bad-rocket.mp3"]
-      }),
+      },
       speed: 30,
       rotation: 3,
       damage: 7,
@@ -197,9 +197,9 @@
       image: "assets/iasonas-bad-small-tentacle.png",
       radius: 80,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/iasonas-bad-small-tentacle.webm", "assets/iasonas-bad-small-tentacle.mp3"]
-      }),
+      },
       speed: 20,
       rotation: 20,
       damage: 7,
@@ -210,12 +210,12 @@
       image: "assets/iasonas-bad-irritating-rocket-powered-obstacle.png",
       radius: 90,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: [
           "assets/iasonas-bad-irritating-rocket-powered-obstacle.webm",
           "assets/iasonas-bad-irritating-rocket-powered-obstacle.mp3"
         ]
-      }),
+      },
       speed: 50,
       rotation: 10,
       damage: 3,
@@ -226,9 +226,9 @@
       image: "assets/iasonas-bad-racing-car.png",
       radius: 90,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/iasonas-bad-racing-car.webm", "assets/iasonas-bad-racing-car.mp3"]
-      }),
+      },
       speed: 70,
       rotation: 0,
       damage: 3,
@@ -239,9 +239,9 @@
       image: "assets/iasonas-bad-tv-set.png",
       radius: 80,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/iasonas-bad-tv-set.webm", "assets/iasonas-bad-tv-set.mp3"]
-      }),
+      },
       speed: 60,
       rotation: 0,
       damage: 3,
@@ -252,9 +252,9 @@
       image: "assets/katerina-bad-big-alien.png",
       radius: 130,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/katerina-bad-big-alien.webm", "assets/katerina-bad-big-alien.mp3"]
-      }),
+      },
       speed: 120,
       rotation: 0,
       damage: 3,
@@ -265,9 +265,9 @@
       image: "assets/katerina-bad-burger.png",
       radius: 90,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/katerina-bad-burger.webm", "assets/katerina-bad-burger.mp3"]
-      }),
+      },
       speed: 75,
       rotation: 10,
       damage: 13,
@@ -278,9 +278,9 @@
       image: "assets/katerina-bad-corona.png",
       radius: 86,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/katerina-bad-corona.webm", "assets/katerina-bad-corona.mp3"]
-      }),
+      },
       speed: 25,
       rotation: 5,
       damage: 5,
@@ -291,9 +291,9 @@
       image: "assets/katerina-bad-flower.png",
       radius: 90,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/katerina-bad-flower.webm", "assets/katerina-bad-flower.mp3"]
-      }),
+      },
       speed: 77,
       rotation: 5,
       damage: 5,
@@ -304,9 +304,9 @@
       image: "assets/katerina-bad-internet-explorer.png",
       radius: 90,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/katerina-bad-internet-explorer.webm", "assets/katerina-bad-internet-explorer.mp3"]
-      }),
+      },
       speed: 50,
       rotation: 3,
       damage: 7,
@@ -317,9 +317,9 @@
       image: "assets/katerina-bad-meteor.png",
       radius: 95,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/katerina-bad-meteor.webm", "assets/katerina-bad-meteor.mp3"]
-      }),
+      },
       speed: 50,
       rotation: 20,
       damage: 10,
@@ -330,9 +330,9 @@
       image: "assets/katerina-bad-red-bomb.png",
       radius: 82,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/katerina-bad-red-bomb.webm", "assets/katerina-bad-red-bomb.mp3"]
-      }),
+      },
       speed: 25,
       rotation: 20,
       damage: 2,
@@ -343,9 +343,9 @@
       image: "assets/katerina-bad-spaceship.png",
       radius: 85,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/katerina-bad-spaceship.webm", "assets/katerina-bad-spaceship.mp3"]
-      }),
+      },
       speed: 110,
       rotation: 0,
       damage: 3,
@@ -356,9 +356,9 @@
       image: "assets/katerina-bad-star.png",
       radius: 80,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/katerina-bad-star.webm", "assets/katerina-bad-star.mp3"]
-      }),
+      },
       speed: 33,
       rotation: 10,
       damage: 20,
@@ -369,9 +369,9 @@
       image: "assets/orestis-bad-ahinos.png",
       radius: 82,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/orestis-bad-ahinos.webm", "assets/orestis-bad-ahinos.mp3"]
-      }),
+      },
       speed: 33,
       rotation: 10,
       damage: 20,
@@ -382,9 +382,9 @@
       image: "assets/orestis-bad-bean-meteor.png",
       radius: 80,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/orestis-bad-bean-meteor.webm", "assets/orestis-bad-bean-meteor.mp3"]
-      }),
+      },
       speed: 50,
       rotation: 0,
       damage: 15,
@@ -395,9 +395,9 @@
       image: "assets/orestis-bad-hairy-salamandra.png",
       radius: 90,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/orestis-bad-hairy-salamandra.webm", "assets/orestis-bad-hairy-salamandra.mp3"]
-      }),
+      },
       speed: 33,
       rotation: 300,
       damage: 20,
@@ -408,9 +408,9 @@
       image: "assets/orestis-bad-tsouhtra.png",
       radius: 125,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/orestis-bad-tsouhtra.webm", "assets/orestis-bad-tsouhtra.mp3"]
-      }),
+      },
       speed: 25,
       rotation: 0,
       damage: 20,
@@ -421,9 +421,9 @@
       image: "assets/iasonas-bad-colored-monster.png",
       radius: 100,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/iasonas-bad-colored-monster.webm", "assets/iasonas-bad-colored-monster.mp3"]
-      }),
+      },
       speed: 90,
       rotation: 0,
       damage: 20,
@@ -434,9 +434,9 @@
       image: "assets/orestis-bad-spaceship-with-ants.png",
       radius: 95,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/orestis-bad-spaceship-with-ants.webm", "assets/orestis-bad-spaceship-with-ants.mp3"]
-      }),
+      },
       speed: 70,
       rotation: 0,
       damage: 20,
@@ -447,9 +447,9 @@
       image: "assets/orestis-bad-spaceship-with-astronauts.png",
       radius: 90,
       size: 10,
-      sound: new Howl({
+      sound: {
         src: ["assets/orestis-bad-spaceship-with-astronauts.webm", "assets/orestis-bad-spaceship-with-astronauts.mp3"]
-      }),
+      },
       speed: 75,
       rotation: 0,
       damage: 20,
