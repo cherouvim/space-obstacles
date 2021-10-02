@@ -1,5 +1,4 @@
 TODOs
-- calculate game screen (max X, Y -> resize/scale canvas on more than that, or simply center a bounded box).
 - mouse/touch handler
 - paralax scrolling
 - scores/health UI
@@ -19,6 +18,7 @@ NO/IGNORE
 - splash screen
 
 DONE
+- calculate game screen (max X, Y -> resize/scale canvas on more than that, or simply center a bounded box).
 - loader UI
 - manifest.json metadata
 - SEO metatags

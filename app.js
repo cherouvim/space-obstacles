@@ -2,7 +2,7 @@
   "use strict";
 
   const MAX_CANVAS_SIZE = 1200;
-  const BACKGROUND_COLOR = "#111";
+  const BACKGROUND_COLOR = "#222";
 
   // utils.
   const createElementFromHTML = htmlString => {
@@ -177,7 +177,7 @@
     }
     if (percent === 100) {
       loader.style.opacity = 0;
-      setTimeout(() => loader.style.display = 'none', 1000);
+      setTimeout(() => (loader.style.display = "none"), 1000);
     }
   };
 
