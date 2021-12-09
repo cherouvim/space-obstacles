@@ -32,6 +32,28 @@ body {
   z-index: 5;
   transition: opacity 1s linear;
 }
+#splash {
+  opacity: 1;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  transition: opacity 1s linear, top 1s cubic-bezier(0.16, 1, 0.3, 1) /* https://easings.net/#easeOutExpo */;
+  font-family: Georgia;
+}
+#splash span.logo {
+  font-size: 9vw;
+  color: white;
+  filter: drop-shadow(0 0 0.9rem #aa2) drop-shadow(0.1em 0.1em 0.2rem #000) drop-shadow(-0.1em 0.1em 0.2rem #444)
+    drop-shadow(10px 10px 0.3rem rgba(255, 0, 0, 0.3)) drop-shadow(-0.1em -0.1em 0.1rem rgba(40, 202, 25, 0.4))
+    drop-shadow(0.1em -0.1em 0.1rem rgba(90, 215, 200, 0.4));
+}
+#splash span.icon {
+  font-size: 3vw;
+  color: white;
+  margin: 2vw;
+  transition: font-size 0.5s linear;
+  filter: drop-shadow(0 0 0.6rem yellow) drop-shadow(0 0 0.1rem #000);
+}
 #message {
   font-size: 3vw;
   color: #ddd;

@@ -11,6 +11,38 @@
     return div.firstChild;
   };
 
+  // https://stackoverflow.com/a/63520666/72478
+  //The first argument is the character you want to test, and the second argument is the font you want to test it in.
+  //If the second argument is left out, it defaults to the font of the <body> element.
+  //The third argument isn't used under normal circumstances, it's just used internally to avoid infinite recursion.
+  const characterIsSupported = (character, font = getComputedStyle(document.body).fontFamily, recursion = false) => {
+    //Create the canvases
+    let testCanvas = document.createElement("canvas");
+    let referenceCanvas = document.createElement("canvas");
+    testCanvas.width = referenceCanvas.width = testCanvas.height = referenceCanvas.height = 150;
+
+    //Render the characters
+    let testContext = testCanvas.getContext("2d");
+    let referenceContext = referenceCanvas.getContext("2d");
+    testContext.font = referenceContext.font = "100px " + font;
+    testContext.fillStyle = referenceContext.fillStyle = "black";
+    testContext.fillText(character, 0, 100);
+    referenceContext.fillText("\uffff", 0, 100);
+
+    //Firefox renders unsupported characters by placing their character code inside the rectangle making each unsupported character look different.
+    //As a workaround, in Firefox, we hide the inside of the character by placing a black rectangle on top of it.
+    //The rectangle we use to hide the inside has an offset of 10px so it can still see part of the character, reducing the risk of false positives.
+    //We check for Firefox and browers that behave similarly by checking if U+FFFE is supported, since U+FFFE is, just like U+FFFF, guaranteed not to be supported.
+    if (!recursion && characterIsSupported("\ufffe", font, true)) {
+      testContext.fillStyle = referenceContext.fillStyle = "black";
+      testContext.fillRect(10, 10, 80, 80);
+      referenceContext.fillRect(10, 10, 80, 80);
+    }
+
+    //Check if the canvases are identical
+    return testCanvas.toDataURL() != referenceCanvas.toDataURL();
+  };
+
   const { min, max, random, floor, round } = Math;
 
   const getSecond = () => floor(new Date().getTime() / 1000);
@@ -23,6 +55,15 @@
 
   const loader = createElementFromHTML(`<div id="loader" style="display: none"></div>`);
   document.getElementById("content").prepend(loader);
+
+  const splash = createElementFromHTML(
+    `<div id="splash" style="display: none"><span class="logo">Space Obstacles</span><br/></div>`
+  );
+  const splashIcons = ["🚀", "👽", "🪐", "☄️", "⭐", "👾", "✨", "🌌"]
+    .filter(character => characterIsSupported(character))
+    .map(character => createElementFromHTML(`<span class="icon">${character}</span>`));
+  splashIcons.forEach(splashIcon => splash.append(splashIcon));
+  document.getElementById("content").prepend(splash);
 
   const message = createElementFromHTML(`<div id="message" style="display: none"></div>`);
   document.getElementById("content").prepend(message);
@@ -128,7 +169,7 @@
     window.requestAnimationFrame(animate);
   };
 
-  const loadAssets = (onAssetLoad, onAssetLoadError, onAllAssetsLoaded) => {
+  const loadAssets = (onAssetLoad, onAssetLoadError, functionsToExecuteWhenAllAssetsHaveLoaded = []) => {
     let loadedAssets = 0;
     const itemsWithImages = [].concat(
       window.GAME.data.backgrounds,
@@ -144,8 +185,8 @@
         item.imageHeight = item.imageElement.naturalHeight;
         loadedAssets++;
         onAssetLoad(floor((loadedAssets / totalAssets) * 100));
-
-        if (loadedAssets === totalAssets) onAllAssetsLoaded();
+        if (loadedAssets === totalAssets)
+          functionsToExecuteWhenAllAssetsHaveLoaded.forEach(functionToExecute => functionToExecute());
       };
       item.imageElement.onerror = () => {
         console.log("ERROR loading image");
@@ -159,7 +200,8 @@
         onload: () => {
           loadedAssets++;
           onAssetLoad(floor((loadedAssets / totalAssets) * 100));
-          if (loadedAssets === totalAssets) onAllAssetsLoaded();
+          if (loadedAssets === totalAssets)
+            functionsToExecuteWhenAllAssetsHaveLoaded.forEach(functionToExecute => functionToExecute());
         },
         onloaderror: () => {
           console.log("ERROR loading sound");
@@ -187,6 +229,18 @@
     message.style.display = "block";
   };
 
+  const showSplashLogo = () => {
+    splash.style.display = "block";
+    splash.style.top = "-5vh";
+    window.setTimeout(() => (splash.style.top = "15vh"), 1);
+  };
+
+  const hideSplashLogo = () => {
+    splash.style.opacity = 0;
+    splash.style.top = "-10vh";
+    window.setTimeout(() => (splash.style.display = "none"), 1000);
+  };
+
   const startGame = () => {
     console.log("start game");
     // playBackgroundMusic();
@@ -194,5 +248,6 @@
   };
 
   displayPercentLoader(0);
-  loadAssets(displayPercentLoader, displayErrorAndRetryButton, startGame);
+  showSplashLogo();
+  loadAssets(displayPercentLoader, displayErrorAndRetryButton, [startGame, hideSplashLogo]);
 })();
