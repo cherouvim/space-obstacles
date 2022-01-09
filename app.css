@@ -40,8 +40,12 @@ body {
   transition: opacity 1s linear, top 1s cubic-bezier(0.16, 1, 0.3, 1) /* https://easings.net/#easeOutExpo */;
   font-family: Georgia;
 }
+#splash.out {
+  transition: opacity 2.5s cubic-bezier(0.7, 0, 0.84, 0) /* https://easings.net/#easeInExpo */,
+    top 2.5s cubic-bezier(0.64, 0, 0.78, 0) /* https://easings.net/#easeInCirc */;
+}
 #splash span.logo {
-  font-size: 9vw;
+  font-size: min(12vw, 9.5em); /* To prevent larger title than play area */
   color: white;
   filter: drop-shadow(0 0 0.9rem #aa2) drop-shadow(0.1em 0.1em 0.2rem #000) drop-shadow(-0.1em 0.1em 0.2rem #444)
     drop-shadow(10px 10px 0.3rem rgba(255, 0, 0, 0.3)) drop-shadow(-0.1em -0.1em 0.1rem rgba(40, 202, 25, 0.4))
@@ -50,7 +54,8 @@ body {
 #splash span.icon {
   font-size: 3vw;
   color: white;
-  margin: 2vw;
+  margin: 2.5vw;
+  line-height: 2em;
   transition: font-size 0.5s linear;
   filter: drop-shadow(0 0 0.6rem yellow) drop-shadow(0 0 0.1rem #000);
 }
@@ -72,4 +77,6 @@ body {
   color: #fff;
 }
 canvas {
+  opacity: 0;
+  transition: opacity 1s linear;
 }

@@ -51,10 +51,10 @@
   const fps = createElementFromHTML(
     `<span style="font-family: sans-serif; opacity: 0.5; background: #fff; position: fixed; top: 0; left: 0"></span>`
   );
-  document.getElementById("content").prepend(fps);
+  document.getElementById("content").append(fps);
 
   const loader = createElementFromHTML(`<div id="loader" style="display: none"></div>`);
-  document.getElementById("content").prepend(loader);
+  document.getElementById("content").append(loader);
 
   const splash = createElementFromHTML(
     `<div id="splash" style="display: none"><span class="logo">Space Obstacles</span><br/></div>`
@@ -63,10 +63,10 @@
     .filter(character => characterIsSupported(character))
     .map(character => createElementFromHTML(`<span class="icon">${character}</span>`));
   splashIcons.forEach(splashIcon => splash.append(splashIcon));
-  document.getElementById("content").prepend(splash);
+  document.getElementById("content").append(splash);
 
   const message = createElementFromHTML(`<div id="message" style="display: none"></div>`);
-  document.getElementById("content").prepend(message);
+  document.getElementById("content").append(message);
 
   const demoCanvas = itemsCount => {
     const pixelRatio = window.devicePixelRatio || 1;
@@ -89,7 +89,9 @@
     if (MAX_CANVAS_SIZE < window.innerHeight) {
       canvas.style.marginTop = round((window.innerHeight - MAX_CANVAS_SIZE) / 2) + "px";
     }
-    document.getElementById("content").append(canvas);
+    document.getElementById("content").prepend(canvas);
+
+    window.setTimeout(() => (canvas.style.opacity = 1), 0); // setTimeout 0 so this happens on next paint cycle
 
     const items = [];
     for (let i = 0; i < itemsCount; i++) {
@@ -219,7 +221,7 @@
     }
     if (percent === 100) {
       loader.style.opacity = 0;
-      setTimeout(() => (loader.style.display = "none"), 1000);
+      setTimeout(() => (loader.style.display = "none"), 2000);
     }
   };
 
@@ -231,14 +233,17 @@
 
   const showSplashLogo = () => {
     splash.style.display = "block";
-    splash.style.top = "-5vh";
-    window.setTimeout(() => (splash.style.top = "15vh"), 1);
+    splash.style.top = "-10vh";
+    window.setTimeout(() => (splash.style.top = "25vh"), 0); // setTimeout 0 so this happens on next paint cycle
   };
 
   const hideSplashLogo = () => {
-    splash.style.opacity = 0;
-    splash.style.top = "-10vh";
-    window.setTimeout(() => (splash.style.display = "none"), 1000);
+    window.setTimeout(() => {
+      splash.classList.add("out");
+      splash.style.opacity = 0;
+      splash.style.top = "-20vh";
+      window.setTimeout(() => (splash.style.display = "none"), 5000); // Fully remove it after a while.
+    }, 1000); // Delay "hide" just to make sure that CSS transition of "show" has finished.
   };
 
   const startGame = () => {
