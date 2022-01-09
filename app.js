@@ -214,12 +214,13 @@
   };
 
   const displayPercentLoader = percent => {
-    console.log("Loading: " + percent + "%");
     loader.innerHTML = percent + "%";
     if (percent === 0) {
+      console.log("Loading 0%");
       loader.style.display = "block";
     }
     if (percent === 100) {
+      console.log("Loading 100%");
       loader.style.opacity = 0;
       setTimeout(() => (loader.style.display = "none"), 2000);
     }
@@ -247,7 +248,7 @@
   };
 
   const startGame = () => {
-    console.log("start game");
+    console.log("Starting game");
     // playBackgroundMusic();
     demoCanvas(50);
   };
