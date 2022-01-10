@@ -1,5 +1,5 @@
 TODOs
-- mouse/touch handler
+- mouse/touch handler - decide whether to center player on touch end
 - paralax scrolling
 - scores/health UI
 - enemies

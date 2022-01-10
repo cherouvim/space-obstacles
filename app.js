@@ -1,17 +1,6 @@
 (function (undefined) {
   "use strict";
 
-  // ***************************** GAME CONSTANTS *****************************
-  const MAX_CANVAS_SIZE = 1200;
-  const BACKGROUND_COLOR = "#222";
-  const PIXEL_RATIO = window.devicePIXEL_RATIO || 1;
-  const CANVAS_WIDTH = Math.min(MAX_CANVAS_SIZE, window.innerWidth) * PIXEL_RATIO;
-  const CANVAS_HEIGHT = Math.min(MAX_CANVAS_SIZE, window.innerHeight) * PIXEL_RATIO;
-  const CANVAS_CSS_WIDTH = Math.min(MAX_CANVAS_SIZE, window.innerWidth);
-  const CANVAS_CSS_HEIGHT = Math.min(MAX_CANVAS_SIZE, window.innerHeight);
-  let canvas;
-  let context;
-
   // ********************************** UTILS **********************************
   const createElementFromHTML = htmlString => {
     const div = document.createElement("div");
@@ -25,6 +14,23 @@
   const { min, max, random, floor, round } = Math;
 
   const getSecond = () => floor(new Date().getTime() / 1000);
+
+  // ***************************** GAME CONSTANTS *****************************
+  const MAX_CANVAS_SIZE = 1200;
+  const BACKGROUND_COLOR = "#222";
+  const PIXEL_RATIO = window.devicePIXEL_RATIO || 1;
+  const CANVAS_WIDTH = min(MAX_CANVAS_SIZE, window.innerWidth) * PIXEL_RATIO;
+  const CANVAS_HEIGHT = min(MAX_CANVAS_SIZE, window.innerHeight) * PIXEL_RATIO;
+  const CANVAS_CSS_WIDTH = min(MAX_CANVAS_SIZE, window.innerWidth);
+  const CANVAS_CSS_HEIGHT = min(MAX_CANVAS_SIZE, window.innerHeight);
+  const CANVAS_LEFT_PAD = MAX_CANVAS_SIZE < window.innerWidth ? round((window.innerWidth - MAX_CANVAS_SIZE) / 2) : 0;
+  const CANVAS_TOP_PAD = MAX_CANVAS_SIZE < window.innerHeight ? round((window.innerHeight - MAX_CANVAS_SIZE) / 2) : 0;
+
+  // ***************************** GAME VARIABLES *****************************
+  let canvas;
+  let context;
+  let mouseX;
+  let mouseY;
 
   // ****************************** DOM ELEMENTS ******************************
   const fps = createElementFromHTML(
@@ -56,16 +62,33 @@
     canvas.style.width = CANVAS_CSS_WIDTH + "px";
     canvas.style.height = CANVAS_CSS_HEIGHT + "px";
     // context.imageSmoothingEnabled = false;
-    if (MAX_CANVAS_SIZE < window.innerWidth) {
-      canvas.style.marginLeft = round((window.innerWidth - MAX_CANVAS_SIZE) / 2) + "px";
-    }
-    if (MAX_CANVAS_SIZE < window.innerHeight) {
-      canvas.style.marginTop = round((window.innerHeight - MAX_CANVAS_SIZE) / 2) + "px";
-    }
+    canvas.style.marginLeft = CANVAS_LEFT_PAD + "px";
+    canvas.style.marginTop = CANVAS_TOP_PAD + "px";
     document.getElementById("content").prepend(canvas);
+
+    window.addEventListener("mousemove", e => {
+      mouseX = e.clientX - CANVAS_LEFT_PAD;
+      mouseY = e.clientY - CANVAS_TOP_PAD;
+    });
+    canvas.addEventListener("touchmove", e => {
+      mouseX = e.touches[0].clientX - CANVAS_LEFT_PAD;
+      mouseY = e.touches[0].clientY - CANVAS_TOP_PAD;
+    });
   };
 
   const runDemo = itemsCount => {
+    const emptyCanvas = () => {
+      context.fillStyle = BACKGROUND_COLOR;
+      context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    };
+
+    const renderDot = () => {
+      context.fillStyle = "#ff0";
+      context.beginPath();
+      context.arc(mouseX, mouseY, 10, 0, 2 * Math.PI, false);
+      context.fill();
+    };
+
     const items = [];
     for (let i = 0; i < itemsCount; i++) {
       const obstacle = window.GAME.data.obstacles[i % window.GAME.data.obstacles.length];
@@ -89,6 +112,10 @@
     function gameLoop(timestamp) {
       const now = window.performance.now();
 
+      emptyCanvas();
+
+      renderDot();
+
       for (let i = 0; i < itemsCount; i++) {
         const item = items[i];
         item.x += item.dx;
@@ -99,8 +126,6 @@
           item.dy = -item.dy;
         // item.opacity = timestamp % 500 < 250 ? 1 : 0.5; // blink
       }
-      context.fillStyle = BACKGROUND_COLOR;
-      context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
       for (let i = 0; i < itemsCount; i++) {
         const item = items[i];
