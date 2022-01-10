@@ -15,9 +15,9 @@ MAYBE/FUTURE
 
 NO/IGNORE
 - github link
-- splash screen
 
 DONE
+- splash screen
 - calculate game screen (max X, Y -> resize/scale canvas on more than that, or simply center a bounded box).
 - loader UI
 - manifest.json metadata
