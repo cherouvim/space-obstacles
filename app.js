@@ -16,7 +16,7 @@
   const getSecond = () => floor(new Date().getTime() / 1000);
 
   // ***************************** GAME CONSTANTS *****************************
-  const PIXEL_RATIO = window.devicePIXEL_RATIO || 1;
+  const PIXEL_RATIO = window.devicePixelRatio || 1;
   const CANVAS_MAX_SIZE = 1200;
   const CANVAS_BACKGROUND_COLOR = "#222";
   const CANVAS_WIDTH = min(CANVAS_MAX_SIZE, window.innerWidth) * PIXEL_RATIO;
