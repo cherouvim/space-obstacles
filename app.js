@@ -67,12 +67,12 @@
     document.getElementById("content").prepend(canvas);
 
     window.addEventListener("mousemove", e => {
-      mouseX = e.clientX - CANVAS_LEFT_PAD;
-      mouseY = e.clientY - CANVAS_TOP_PAD;
+      mouseX = e.clientX * PIXEL_RATIO - CANVAS_LEFT_PAD;
+      mouseY = e.clientY * PIXEL_RATIO - CANVAS_TOP_PAD;
     });
     canvas.addEventListener("touchmove", e => {
-      mouseX = e.touches[0].clientX - CANVAS_LEFT_PAD;
-      mouseY = e.touches[0].clientY - CANVAS_TOP_PAD;
+      mouseX = e.touches[0].clientX * PIXEL_RATIO - CANVAS_LEFT_PAD;
+      mouseY = e.touches[0].clientY * PIXEL_RATIO - CANVAS_TOP_PAD;
     });
   };
 
@@ -85,7 +85,7 @@
     const renderDot = () => {
       context.fillStyle = "#ff0";
       context.beginPath();
-      context.arc(mouseX, mouseY, 10, 0, 2 * Math.PI, false);
+      context.arc(mouseX, mouseY, 10 * PIXEL_RATIO, 0, 2 * Math.PI, false);
       context.fill();
     };
 
