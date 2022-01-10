@@ -64,8 +64,6 @@
     }
     document.getElementById("content").prepend(canvas);
 
-    window.setTimeout(() => (canvas.style.opacity = 1), 0); // setTimeout 0 so this happens on next paint cycle
-
     const items = [];
     for (let i = 0; i < itemsCount; i++) {
       const obstacle = window.GAME.data.obstacles[i % window.GAME.data.obstacles.length];
@@ -141,7 +139,10 @@
 
       window.requestAnimationFrame(animate);
     }
-    window.requestAnimationFrame(animate);
+    window.requestAnimationFrame(timestamp => {
+      animate(timestamp);
+      window.requestAnimationFrame(() => (canvas.style.opacity = 1));
+    });
   };
 
   const loadAssets = (onAssetLoad, onAssetLoadError, functionsToExecuteWhenAllAssetsHaveLoaded = []) => {
@@ -206,9 +207,13 @@
   };
 
   const showSplashLogo = () => {
-    splash.style.display = "block";
-    splash.style.top = "-10vh";
-    window.setTimeout(() => (splash.style.top = "25vh"), 0); // setTimeout 0 so this happens on next paint cycle
+    window.requestAnimationFrame(() => {
+      splash.style.display = "block";
+      splash.style.top = "-10vh";
+      window.requestAnimationFrame(() => {
+        splash.style.top = "25vh";
+      });
+    });
   };
 
   const hideSplashLogo = () => {
