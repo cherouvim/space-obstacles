@@ -16,15 +16,15 @@
   const getSecond = () => floor(new Date().getTime() / 1000);
 
   // ***************************** GAME CONSTANTS *****************************
-  const MAX_CANVAS_SIZE = 1200;
-  const BACKGROUND_COLOR = "#222";
   const PIXEL_RATIO = window.devicePIXEL_RATIO || 1;
-  const CANVAS_WIDTH = min(MAX_CANVAS_SIZE, window.innerWidth) * PIXEL_RATIO;
-  const CANVAS_HEIGHT = min(MAX_CANVAS_SIZE, window.innerHeight) * PIXEL_RATIO;
-  const CANVAS_CSS_WIDTH = min(MAX_CANVAS_SIZE, window.innerWidth);
-  const CANVAS_CSS_HEIGHT = min(MAX_CANVAS_SIZE, window.innerHeight);
-  const CANVAS_LEFT_PAD = MAX_CANVAS_SIZE < window.innerWidth ? round((window.innerWidth - MAX_CANVAS_SIZE) / 2) : 0;
-  const CANVAS_TOP_PAD = MAX_CANVAS_SIZE < window.innerHeight ? round((window.innerHeight - MAX_CANVAS_SIZE) / 2) : 0;
+  const CANVAS_MAX_SIZE = 1200;
+  const CANVAS_BACKGROUND_COLOR = "#222";
+  const CANVAS_WIDTH = min(CANVAS_MAX_SIZE, window.innerWidth) * PIXEL_RATIO;
+  const CANVAS_HEIGHT = min(CANVAS_MAX_SIZE, window.innerHeight) * PIXEL_RATIO;
+  const CANVAS_CSS_WIDTH = min(CANVAS_MAX_SIZE, window.innerWidth);
+  const CANVAS_CSS_HEIGHT = min(CANVAS_MAX_SIZE, window.innerHeight);
+  const CANVAS_LEFT_PAD = CANVAS_MAX_SIZE < window.innerWidth ? round((window.innerWidth - CANVAS_MAX_SIZE) / 2) : 0;
+  const CANVAS_TOP_PAD = CANVAS_MAX_SIZE < window.innerHeight ? round((window.innerHeight - CANVAS_MAX_SIZE) / 2) : 0;
 
   // ***************************** GAME VARIABLES *****************************
   let canvas;
@@ -78,7 +78,7 @@
 
   const runDemo = itemsCount => {
     const emptyCanvas = () => {
-      context.fillStyle = BACKGROUND_COLOR;
+      context.fillStyle = CANVAS_BACKGROUND_COLOR;
       context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     };
 
