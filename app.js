@@ -4,6 +4,13 @@
   // ***************************** GAME CONSTANTS *****************************
   const MAX_CANVAS_SIZE = 1200;
   const BACKGROUND_COLOR = "#222";
+  const PIXEL_RATIO = window.devicePIXEL_RATIO || 1;
+  const CANVAS_WIDTH = Math.min(MAX_CANVAS_SIZE, window.innerWidth) * PIXEL_RATIO;
+  const CANVAS_HEIGHT = Math.min(MAX_CANVAS_SIZE, window.innerHeight) * PIXEL_RATIO;
+  const CANVAS_CSS_WIDTH = Math.min(MAX_CANVAS_SIZE, window.innerWidth);
+  const CANVAS_CSS_HEIGHT = Math.min(MAX_CANVAS_SIZE, window.innerHeight);
+  let canvas;
+  let context;
 
   // ********************************** UTILS **********************************
   const createElementFromHTML = htmlString => {
@@ -41,20 +48,13 @@
   document.getElementById("content").append(message);
 
   // ********************** GAME SCENE OR LOGIC FUNCTIONS **********************
-  const demoCanvas = itemsCount => {
-    const pixelRatio = window.devicePixelRatio || 1;
-    const width = min(MAX_CANVAS_SIZE, window.innerWidth) * pixelRatio;
-    const height = min(MAX_CANVAS_SIZE, window.innerHeight) * pixelRatio;
-    const cssWidth = min(MAX_CANVAS_SIZE, window.innerWidth);
-    const cssHeight = min(MAX_CANVAS_SIZE, window.innerHeight);
-
-    const canvas = document.createElement("canvas");
-    const context = canvas.getContext("2d");
-
-    canvas.width = width; // The actual pixels rendered through this canvas.
-    canvas.height = height; // The actual pixels rendered through this canvas.
-    canvas.style.width = cssWidth + "px";
-    canvas.style.height = cssHeight + "px";
+  const initializeCanvas = () => {
+    canvas = document.createElement("canvas");
+    context = canvas.getContext("2d");
+    canvas.width = CANVAS_WIDTH; // The actual pixels rendered through this canvas.
+    canvas.height = CANVAS_HEIGHT; // The actual pixels rendered through this canvas.
+    canvas.style.width = CANVAS_CSS_WIDTH + "px";
+    canvas.style.height = CANVAS_CSS_HEIGHT + "px";
     // context.imageSmoothingEnabled = false;
     if (MAX_CANVAS_SIZE < window.innerWidth) {
       canvas.style.marginLeft = round((window.innerWidth - MAX_CANVAS_SIZE) / 2) + "px";
@@ -63,42 +63,44 @@
       canvas.style.marginTop = round((window.innerHeight - MAX_CANVAS_SIZE) / 2) + "px";
     }
     document.getElementById("content").prepend(canvas);
+  };
 
+  const runDemo = itemsCount => {
     const items = [];
     for (let i = 0; i < itemsCount; i++) {
       const obstacle = window.GAME.data.obstacles[i % window.GAME.data.obstacles.length];
 
       items[i] = {
-        x: width / 2,
-        y: height / 2,
+        x: CANVAS_WIDTH / 2,
+        y: CANVAS_HEIGHT / 2,
         dx: random() * 6 - 3,
         dy: random() * 6 - 3,
-        sizex: round((width / 100) * obstacle.size),
+        sizex: round((CANVAS_WIDTH / 100) * obstacle.size),
         data: obstacle,
         image: new Image(),
         opacity: 1,
-        radiusPixels: round(width * (obstacle.size / 100) * (obstacle.radius / 100)) / 2
+        radiusPixels: round(CANVAS_WIDTH * (obstacle.size / 100) * (obstacle.radius / 100)) / 2
       };
       items[i].image.src = obstacle.image;
     }
 
     let count = 0;
     let second = getSecond();
-    function animate(timestamp) {
+    function gameLoop(timestamp) {
       const now = window.performance.now();
 
       for (let i = 0; i < itemsCount; i++) {
         const item = items[i];
         item.x += item.dx;
         item.y += item.dy;
-        if (item.x - item.radiusPixels + item.dx < 0 || item.x + item.radiusPixels + item.dx > width)
+        if (item.x - item.radiusPixels + item.dx < 0 || item.x + item.radiusPixels + item.dx > CANVAS_WIDTH)
           item.dx = -item.dx;
-        if (item.y - item.radiusPixels + item.dy < 0 || item.y + item.radiusPixels + item.dy > height)
+        if (item.y - item.radiusPixels + item.dy < 0 || item.y + item.radiusPixels + item.dy > CANVAS_HEIGHT)
           item.dy = -item.dy;
         // item.opacity = timestamp % 500 < 250 ? 1 : 0.5; // blink
       }
       context.fillStyle = BACKGROUND_COLOR;
-      context.fillRect(0, 0, width, height);
+      context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
       for (let i = 0; i < itemsCount; i++) {
         const item = items[i];
@@ -133,14 +135,14 @@
         second = getSecond();
         fps.innerHTML = `${count} fps / ${(window.performance.now() - now).toFixed(4)}ms window: ${window.innerWidth}x${
           window.innerHeight
-        } canvas: ${width}x${height} pixel ratio: ${pixelRatio}`;
+        } canvas: ${CANVAS_WIDTH}x${CANVAS_HEIGHT} pixel ratio: ${PIXEL_RATIO}`;
         count = 0;
       }
 
-      window.requestAnimationFrame(animate);
+      window.requestAnimationFrame(gameLoop);
     }
     window.requestAnimationFrame(timestamp => {
-      animate(timestamp);
+      gameLoop(timestamp);
       window.requestAnimationFrame(() => (canvas.style.opacity = 1));
     });
   };
@@ -228,7 +230,8 @@
   const startGame = () => {
     console.log("Starting game");
     // playBackgroundMusic();
-    demoCanvas(50);
+    initializeCanvas();
+    runDemo(50);
   };
 
   // ******************************* START GAME *******************************
