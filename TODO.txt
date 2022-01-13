@@ -12,6 +12,8 @@ IMPROVE
 MAYBE/FUTURE
 - use cloudflare
 - webp
+- lock orientation on PWA?
+- refresh canvas on rotate?
 
 NO/IGNORE
 - github link
