@@ -76,18 +76,20 @@
     });
   };
 
-  const runDemo = itemsCount => {
-    const emptyCanvas = () => {
-      context.fillStyle = CANVAS_BACKGROUND_COLOR;
-      context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    };
+  const runGame = itemsCount => {
+    let count = 0;
+    let second = getSecond();
 
-    const renderDot = () => {
-      context.fillStyle = "#ff0";
-      context.beginPath();
-      context.arc(mouseX, mouseY, 10 * PIXEL_RATIO, 0, 2 * Math.PI, false);
-      context.fill();
+    const player = {
+      x: CANVAS_WIDTH / 2,
+      y: CANVAS_HEIGHT / 2,
+      sizex: round((CANVAS_WIDTH / 100) * window.GAME.data.players[0].size),
+      data: window.GAME.data.players[0],
+      image: new Image(),
+      radiusPixels:
+        round(CANVAS_WIDTH * (window.GAME.data.players[0].size / 100) * (window.GAME.data.players[0].radius / 100)) / 2
     };
+    player.image.src = player.data.image;
 
     const items = [];
     for (let i = 0; i < itemsCount; i++) {
@@ -107,15 +109,17 @@
       items[i].image.src = obstacle.image;
     }
 
-    let count = 0;
-    let second = getSecond();
-    function gameLoop(timestamp) {
-      const now = window.performance.now();
+    const emptyCanvas = () => {
+      context.fillStyle = CANVAS_BACKGROUND_COLOR;
+      context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    };
 
-      emptyCanvas();
+    const movePlayer = () => {
+      player.x += ((mouseX || 0) - player.x) / 8;
+      player.y += ((mouseY || 0) - player.y) / 8;
+    };
 
-      renderDot();
-
+    const moveObstacles = () => {
       for (let i = 0; i < itemsCount; i++) {
         const item = items[i];
         item.x += item.dx;
@@ -126,7 +130,29 @@
           item.dy = -item.dy;
         // item.opacity = timestamp % 500 < 250 ? 1 : 0.5; // blink
       }
+    };
 
+    const renderPlayer = timestamp => {
+      if (!(player.image.complete && player.image.naturalWidth)) return;
+      if (!player.sizey) {
+        player.sizey = round((player.image.naturalHeight * player.sizex) / player.image.naturalWidth);
+      }
+      context.globalAlpha = player.opacity;
+      context.translate(player.x, player.y);
+      if (player.opacity < 1) context.globalAlpha = player.opacity;
+      context.drawImage(
+        player.image,
+        round(player.sizex / 2 - player.sizex),
+        round(player.sizey / 2 - player.sizey),
+        round(player.sizex),
+        round(player.sizey)
+      );
+      if (player.opacity < 1) context.globalAlpha = 1;
+      context.translate(-player.x, -player.y);
+      context.setTransform(1, 0, 0, 1, 0, 0);
+    };
+
+    const renderObstacles = timestamp => {
       for (let i = 0; i < itemsCount; i++) {
         const item = items[i];
         if (!(item.image.complete && item.image.naturalWidth)) continue;
@@ -155,6 +181,9 @@
         context.translate(-item.x, -item.y);
         context.setTransform(1, 0, 0, 1, 0, 0);
       }
+    };
+
+    const calculateAndRenderFPS = now => {
       count++;
       if (second !== getSecond()) {
         second = getSecond();
@@ -163,7 +192,16 @@
         } canvas: ${CANVAS_WIDTH}x${CANVAS_HEIGHT} pixel ratio: ${PIXEL_RATIO}`;
         count = 0;
       }
+    };
 
+    function gameLoop(timestamp) {
+      const now = window.performance.now();
+      emptyCanvas();
+      movePlayer();
+      moveObstacles();
+      renderPlayer(timestamp);
+      renderObstacles(timestamp);
+      calculateAndRenderFPS(now);
       window.requestAnimationFrame(gameLoop);
     }
     window.requestAnimationFrame(timestamp => {
@@ -256,7 +294,7 @@
     console.log("Starting game");
     // playBackgroundMusic();
     initializeCanvas();
-    runDemo(50);
+    runGame(50);
   };
 
   // ******************************* START GAME *******************************
