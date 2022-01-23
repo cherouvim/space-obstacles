@@ -1,6 +1,7 @@
 TODOs
 - mouse/touch handler - decide whether to center player on touch end
-- paralax scrolling
+- mouse/touch handler - player initially jumps on 0,0
+- background animation improvement (constant move and %)
 - scores/health UI
 - enemies
 - levels
