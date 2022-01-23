@@ -54,6 +54,22 @@
   document.getElementById("content").append(message);
 
   // ********************** GAME SCENE OR LOGIC FUNCTIONS **********************
+  const calculateObstacleLevels = () =>
+    window.GAME.data.obstacles.forEach(
+      obstacle =>
+        (obstacle.level = floor(
+          random() * 100 +
+            obstacle.radius * 1 +
+            obstacle.size * 3 +
+            obstacle.speed * 4 +
+            obstacle.rotation * 0.25 +
+            obstacle.damage * 3
+        ))
+    );
+
+  const sortObtaclesByLevel = () =>
+    window.GAME.data.obstacles.sort((obstacleA, obstacleB) => obstacleA.level - obstacleB.level);
+
   const initializeCanvas = () => {
     canvas = document.createElement("canvas");
     context = canvas.getContext("2d");
@@ -90,6 +106,9 @@
         round(CANVAS_WIDTH * (window.GAME.data.players[0].size / 100) * (window.GAME.data.players[0].radius / 100)) / 2
     };
     player.image.src = player.data.image;
+
+    calculateObstacleLevels();
+    sortObtaclesByLevel();
 
     const items = [];
     for (let i = 0; i < itemsCount; i++) {
