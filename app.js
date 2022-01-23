@@ -25,6 +25,7 @@
   const CANVAS_CSS_HEIGHT = min(CANVAS_MAX_SIZE, window.innerHeight);
   const CANVAS_LEFT_PAD = CANVAS_MAX_SIZE < window.innerWidth ? round((window.innerWidth - CANVAS_MAX_SIZE) / 2) : 0;
   const CANVAS_TOP_PAD = CANVAS_MAX_SIZE < window.innerHeight ? round((window.innerHeight - CANVAS_MAX_SIZE) / 2) : 0;
+  const BACKGROUND_ITEMS_COUNT = 200;
 
   // ***************************** GAME VARIABLES *****************************
   let canvas;
@@ -92,9 +93,37 @@
     });
   };
 
+  const generateRandomBackgroundItem = (fresh = true) => {
+    const proximity = random(); // 0.1 is far away, 0.7 is close.
+    const item = {
+      x: random() * CANVAS_WIDTH,
+      y: random() * CANVAS_HEIGHT,
+      sizex: round((CANVAS_WIDTH / 500) * proximity * 5 + 1),
+      speed: proximity,
+      image: new Image(),
+      opacity: proximity * 0.8 + 0.1
+    };
+    if (fresh === false) {
+      // Start background image off screen.
+      // TODO: Do not do this. Implement constant background item move, and render on screen using %.
+      if (random() > 0.5) {
+        item.x = 0;
+      } else {
+        item.y = 0;
+      }
+    }
+    item.image.src = window.GAME.data.backgrounds[floor(random() * window.GAME.data.backgrounds.length)].image;
+    return item;
+  };
+
   const runGame = itemsCount => {
     let count = 0;
     let second = getSecond();
+
+    const backgroundItems = [];
+    for (let i = 0; i < BACKGROUND_ITEMS_COUNT; i++) {
+      backgroundItems[i] = generateRandomBackgroundItem(true);
+    }
 
     const player = {
       x: CANVAS_WIDTH / 2,
@@ -133,6 +162,22 @@
       context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     };
 
+    const moveBackground = (timestamp, timeDiff) => {
+      backgroundItems.forEach((item, index) => {
+        item.x += (item.speed * timeDiff) / 10;
+        item.y += (item.speed * timeDiff) / 10;
+        if (
+          item.x > CANVAS_WIDTH + item.sizex ||
+          item.x < -item.sizex ||
+          item.y > CANVAS_HEIGHT + item.sizey ||
+          item.y < -item.sizey
+        ) {
+          // It's out of screen. Grab a new one.
+          backgroundItems[index] = generateRandomBackgroundItem(false);
+        }
+      });
+    };
+
     const movePlayer = () => {
       player.x += ((mouseX || 0) - player.x) / 8;
       player.y += ((mouseY || 0) - player.y) / 8;
@@ -151,12 +196,34 @@
       }
     };
 
+    const renderBackground = timestamp => {
+      backgroundItems.forEach(backgroundItem => {
+        if (!(backgroundItem.image.complete && backgroundItem.image.naturalWidth)) return;
+        if (!backgroundItem.sizey) {
+          backgroundItem.sizey = round(
+            (backgroundItem.image.naturalHeight * backgroundItem.sizex) / backgroundItem.image.naturalWidth
+          );
+        }
+
+        context.globalAlpha = backgroundItem.opacity;
+        context.translate(backgroundItem.x, backgroundItem.y);
+        context.drawImage(
+          backgroundItem.image,
+          round(backgroundItem.sizex / 2 - backgroundItem.sizex),
+          round(backgroundItem.sizey / 2 - backgroundItem.sizey),
+          round(backgroundItem.sizex),
+          round(backgroundItem.sizey)
+        );
+        context.translate(-backgroundItem.x, -backgroundItem.y);
+      });
+    };
+
     const renderPlayer = timestamp => {
       if (!(player.image.complete && player.image.naturalWidth)) return;
       if (!player.sizey) {
         player.sizey = round((player.image.naturalHeight * player.sizex) / player.image.naturalWidth);
       }
-      context.globalAlpha = player.opacity;
+      context.globalAlpha = 1;
       context.translate(player.x, player.y);
       if (player.opacity < 1) context.globalAlpha = player.opacity;
       context.drawImage(
@@ -166,7 +233,6 @@
         round(player.sizex),
         round(player.sizey)
       );
-      if (player.opacity < 1) context.globalAlpha = 1;
       context.translate(-player.x, -player.y);
       context.setTransform(1, 0, 0, 1, 0, 0);
     };
@@ -213,14 +279,19 @@
       }
     };
 
+    let previousTimestamp = 0;
+
     function gameLoop(timestamp) {
       const now = window.performance.now();
       emptyCanvas();
+      moveBackground(timestamp, timestamp - previousTimestamp);
       movePlayer();
       moveObstacles();
+      renderBackground(timestamp);
       renderPlayer(timestamp);
       renderObstacles(timestamp);
       calculateAndRenderFPS(now);
+      previousTimestamp = timestamp;
       window.requestAnimationFrame(gameLoop);
     }
     window.requestAnimationFrame(timestamp => {
