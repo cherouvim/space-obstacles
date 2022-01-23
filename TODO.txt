@@ -10,6 +10,7 @@ TODOs
 IMPROVE
 - favicon
 - conditional rounding (rounding vs no rounding [subpixel rendering]) based on performance
+- full refresh on redeployment
 
 MAYBE/FUTURE
 - use cloudflare
