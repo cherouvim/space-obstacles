@@ -85,7 +85,7 @@
       },
       speed: 33,
       rotation: 0,
-      damage: 0,
+      damage: 7,
       hue: 0
     },
     {
