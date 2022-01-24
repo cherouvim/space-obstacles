@@ -216,7 +216,6 @@
       }
       context.globalAlpha = 1;
       context.translate(player.x, player.y);
-      if (player.opacity < 1) context.globalAlpha = player.opacity;
       context.drawImage(
         player.image,
         round(player.sizex / 2 - player.sizex),
@@ -240,7 +239,6 @@
         if (item.data.rotation)
           context.rotate((((((timestamp * 360) / 1000) * item.data.rotation) / 100) * Math.PI) / 180);
         // if (item.data.hue) context.filter = "hue-rotate(" + (((timestamp * 360) / 1000) * item.data.hue) / 100 + "deg)"; // Note: Slow on chrome desktop.
-        if (item.opacity < 1) context.globalAlpha = item.opacity;
         context.drawImage(
           item.image,
           round(item.sizex / 2 - item.sizex),
@@ -248,7 +246,6 @@
           round(item.sizex),
           round(item.sizey)
         );
-        if (item.opacity < 1) context.globalAlpha = 1;
         // if (item.data.hue) context.filter = "hue-rotate(0deg)"; // Note: Slow on chrome desktop.
         // context.strokeStyle = "#ff0000";
         // context.beginPath();
@@ -274,10 +271,10 @@
 
     function gameLoop(timestamp) {
       const now = window.performance.now();
-      emptyCanvas();
       moveBackground(timestamp, timestamp - previousTimestamp);
       movePlayer();
       moveObstacles();
+      emptyCanvas();
       renderBackground(timestamp);
       renderPlayer(timestamp);
       renderObstacles(timestamp);
