@@ -11,7 +11,7 @@
   // prettier-ignore
   const characterIsSupported = (character, font = getComputedStyle(document.body).fontFamily, recursion = false) => { const testCanvas = document.createElement("canvas"); const referenceCanvas = document.createElement("canvas"); testCanvas.width = referenceCanvas.width = testCanvas.height = referenceCanvas.height = 150; const testContext = testCanvas.getContext("2d"); const referenceContext = referenceCanvas.getContext("2d"); testContext.font = referenceContext.font = "100px " + font; testContext.fillStyle = referenceContext.fillStyle = "black"; testContext.fillText(character, 0, 100); referenceContext.fillText("\uffff", 0, 100); if (!recursion && characterIsSupported("\ufffe", font, true)) { testContext.fillStyle = referenceContext.fillStyle = "black"; testContext.fillRect(10, 10, 80, 80); referenceContext.fillRect(10, 10, 80, 80); } return testCanvas.toDataURL() != referenceCanvas.toDataURL(); }; // https://stackoverflow.com/a/63520666/72478
 
-  const { min, max, random, floor, round } = Math;
+  const { min, max, random, floor, round, cos, sin } = Math;
 
   const getSecond = () => floor(new Date().getTime() / 1000);
 
@@ -32,6 +32,8 @@
   let context;
   let mouseX;
   let mouseY;
+  let backgroundDX = 0;
+  let backgroundDY = 0;
 
   // ****************************** DOM ELEMENTS ******************************
   const fps = createElementFromHTML(
@@ -93,7 +95,7 @@
     });
   };
 
-  const generateRandomBackgroundItem = (fresh = true) => {
+  const generateRandomBackgroundItem = () => {
     const proximity = random(); // 0.1 is far away, 0.7 is close.
     const item = {
       x: random() * CANVAS_WIDTH,
@@ -101,17 +103,8 @@
       sizex: round((CANVAS_WIDTH / 500) * proximity * 5 + 1),
       speed: proximity,
       image: new Image(),
-      opacity: proximity * 0.8 + 0.1
+      opacity: proximity * 0.5 + 0.1
     };
-    if (fresh === false) {
-      // Start background image off screen.
-      // TODO: Do not do this. Implement constant background item move, and render on screen using %.
-      if (random() > 0.5) {
-        item.x = 0;
-      } else {
-        item.y = 0;
-      }
-    }
     item.image.src = window.GAME.data.backgrounds[floor(random() * window.GAME.data.backgrounds.length)].image;
     return item;
   };
@@ -158,23 +151,21 @@
     }
 
     const emptyCanvas = () => {
+      context.globalAlpha = 1;
       context.fillStyle = CANVAS_BACKGROUND_COLOR;
       context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     };
 
     const moveBackground = (timestamp, timeDiff) => {
+      if (floor(timestamp) % 10 === 0) {
+        backgroundDX = cos(timestamp / 10000);
+        backgroundDY = sin(timestamp / 10000);
+      }
       backgroundItems.forEach((item, index) => {
-        item.x += (item.speed * timeDiff) / 10;
-        item.y += (item.speed * timeDiff) / 10;
-        if (
-          item.x > CANVAS_WIDTH + item.sizex ||
-          item.x < -item.sizex ||
-          item.y > CANVAS_HEIGHT + item.sizey ||
-          item.y < -item.sizey
-        ) {
-          // It's out of screen. Grab a new one.
-          backgroundItems[index] = generateRandomBackgroundItem(false);
-        }
+        item.x += ((item.speed * timeDiff) / 5) * backgroundDX;
+        item.y += ((item.speed * timeDiff) / 5) * backgroundDY;
+        item.x = (item.x + CANVAS_WIDTH) % CANVAS_WIDTH;
+        item.y = (item.y + CANVAS_HEIGHT) % CANVAS_HEIGHT;
       });
     };
 
