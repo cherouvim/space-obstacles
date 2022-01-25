@@ -172,6 +172,10 @@
     const movePlayer = () => {
       player.x += ((mouseX || 0) - player.x) / 8;
       player.y += ((mouseY || 0) - player.y) / 8;
+      if (player.x < player.radiusPixels) player.x = player.radiusPixels;
+      if (player.y < player.radiusPixels) player.y = player.radiusPixels;
+      if (player.x > CANVAS_WIDTH - player.radiusPixels) player.x = CANVAS_WIDTH - player.radiusPixels;
+      if (player.y > CANVAS_HEIGHT - player.radiusPixels) player.y = CANVAS_HEIGHT - player.radiusPixels;
     };
 
     const moveObstacles = () => {
