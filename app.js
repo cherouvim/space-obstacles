@@ -11,7 +11,7 @@
   // prettier-ignore
   const characterIsSupported = (character, font = getComputedStyle(document.body).fontFamily, recursion = false) => { const testCanvas = document.createElement("canvas"); const referenceCanvas = document.createElement("canvas"); testCanvas.width = referenceCanvas.width = testCanvas.height = referenceCanvas.height = 150; const testContext = testCanvas.getContext("2d"); const referenceContext = referenceCanvas.getContext("2d"); testContext.font = referenceContext.font = "100px " + font; testContext.fillStyle = referenceContext.fillStyle = "black"; testContext.fillText(character, 0, 100); referenceContext.fillText("\uffff", 0, 100); if (!recursion && characterIsSupported("\ufffe", font, true)) { testContext.fillStyle = referenceContext.fillStyle = "black"; testContext.fillRect(10, 10, 80, 80); referenceContext.fillRect(10, 10, 80, 80); } return testCanvas.toDataURL() != referenceCanvas.toDataURL(); }; // https://stackoverflow.com/a/63520666/72478
 
-  const { min, max, random, floor, round, cos, sin } = Math;
+  const { min, max, random, floor, round, cos, sin, pow, sqrt } = Math;
 
   const getSecond = () => floor(new Date().getTime() / 1000);
 
@@ -187,6 +187,17 @@
       }
     };
 
+    const calculateCollisions = () => {
+      for (let i = 0; i < itemsCount; i++) {
+        const item = items[i];
+        if (sqrt(pow(item.x - player.x, 2) + pow(item.y - player.y, 2)) < player.radiusPixels + item.radiusPixels) {
+          console.log("COLISION with " + item.data.name);
+          // item.data.sound.play();
+          // return item;
+        }
+      }
+    };
+
     const renderBackground = timestamp => {
       backgroundItems.forEach(backgroundItem => {
         if (!(backgroundItem.image.complete && backgroundItem.image.naturalWidth)) return;
@@ -274,6 +285,7 @@
       moveBackground(timestamp, timestamp - previousTimestamp);
       movePlayer();
       moveObstacles();
+      calculateCollisions();
       emptyCanvas();
       renderBackground(timestamp);
       renderPlayer(timestamp);
