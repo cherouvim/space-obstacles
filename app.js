@@ -191,7 +191,7 @@
       for (let i = 0; i < itemsCount; i++) {
         const item = items[i];
         if (sqrt(pow(item.x - player.x, 2) + pow(item.y - player.y, 2)) < player.radiusPixels + item.radiusPixels) {
-          console.log("COLISION with " + item.data.name);
+          console.log("Detected player collision with " + item.data.name);
           // item.data.sound.play();
           // return item;
         }
