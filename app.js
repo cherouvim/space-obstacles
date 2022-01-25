@@ -30,8 +30,8 @@
   // ***************************** GAME VARIABLES *****************************
   let canvas;
   let context;
-  let mouseX;
-  let mouseY;
+  let mouseX = CANVAS_WIDTH / 2;
+  let mouseY = CANVAS_HEIGHT / 2;
   let backgroundDX = 0;
   let backgroundDY = 0;
 
