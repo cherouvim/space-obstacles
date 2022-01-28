@@ -36,13 +36,12 @@
   let backgroundDY = 0;
   let score = 0;
   let health = 100;
-  let lastCollidingItem = undefined;
 
   // ****************************** DOM ELEMENTS ******************************
-  const fps = createElementFromHTML(
+  const fpsDom = createElementFromHTML(
     `<span style="font-family: sans-serif; opacity: 0.5; background: #fff; position: fixed; top: 0; left: 0"></span>`
   );
-  document.getElementById("content").append(fps);
+  document.getElementById("content").append(fpsDom);
 
   const scoreDom = createElementFromHTML(
     `<span style="font-family: sans-serif; opacity: 1; background: #fff; position: fixed; top: 0; right: 0"></span>`
@@ -123,9 +122,6 @@
   };
 
   const runGame = itemsCount => {
-    let count = 0;
-    let second = getSecond();
-
     const backgroundItems = [];
     for (let i = 0; i < BACKGROUND_ITEMS_COUNT; i++) {
       backgroundItems[i] = generateRandomBackgroundItem(true);
@@ -174,7 +170,7 @@
         backgroundDX = cos(timestamp / 10000);
         backgroundDY = sin(timestamp / 10000);
       }
-      backgroundItems.forEach((item, index) => {
+      backgroundItems.forEach(item => {
         item.x += ((item.speed * timeDiff) / 5) * backgroundDX;
         item.y += ((item.speed * timeDiff) / 5) * backgroundDY;
         item.x = (item.x + CANVAS_WIDTH) % CANVAS_WIDTH;
@@ -204,24 +200,6 @@
       }
     };
 
-    const detectCollisions = timestamp => {
-      console.log(health);
-      const collidingItem = getCollidingItem();
-      if (collidingItem && collidingItem !== lastCollidingItem) {
-        console.log("Detected player collision with " + collidingItem.data.name);
-        health = max(health - collidingItem.data.damage, 0);
-        // TODO: play damage sound
-      }
-      lastCollidingItem = collidingItem;
-    };
-
-    let lastSecond = undefined;
-    const increaseScoreAndHealth = timestamp => {
-      if (lastSecond) health = min(health + floor(timestamp / 1000) - lastSecond, 100);
-      if (lastSecond) score += (floor(timestamp / 1000) - lastSecond) * 10;
-      lastSecond = floor(timestamp / 1000);
-    };
-
     const getCollidingItem = () => {
       for (let i = 0; i < itemsCount; i++) {
         const item = items[i];
@@ -231,7 +209,34 @@
       }
     };
 
-    const renderBackground = timestamp => {
+    let lastCollidingItem = undefined;
+    const detectCollisions = () => {
+      const collidingItem = getCollidingItem();
+      if (collidingItem && collidingItem !== lastCollidingItem) {
+        console.log(
+          "Detected player collision with " +
+            collidingItem.data.name +
+            ". Reducing health by " +
+            collidingItem.data.damage +
+            "."
+        );
+        health = max(health - collidingItem.data.damage, 0);
+        // TODO: play damage sound
+      }
+      lastCollidingItem = collidingItem;
+    };
+
+    let previousHealthTick = getSecond();
+    const increaseScoreAndHealth = () => {
+      const healthTick = getSecond();
+      if (healthTick !== previousHealthTick) {
+        health = min(health + (healthTick - previousHealthTick) * 1, 100);
+        score += (healthTick - previousHealthTick) * 10;
+        previousHealthTick = healthTick;
+      }
+    };
+
+    const renderBackground = () => {
       backgroundItems.forEach(backgroundItem => {
         if (!(backgroundItem.image.complete && backgroundItem.image.naturalWidth)) return;
         if (!backgroundItem.sizey) {
@@ -312,14 +317,16 @@
       console.log("Game over!");
     };
 
+    let fps = 0;
+    let fpsTick = getSecond();
     const calculateAndRenderFPS = now => {
-      count++;
-      if (second !== getSecond()) {
-        second = getSecond();
-        fps.innerHTML = `${count} fps / ${(window.performance.now() - now).toFixed(4)}ms window: ${window.innerWidth}x${
-          window.innerHeight
-        } canvas: ${CANVAS_WIDTH}x${CANVAS_HEIGHT} pixel ratio: ${PIXEL_RATIO}`;
-        count = 0;
+      fps++;
+      if (fpsTick !== getSecond()) {
+        fpsTick = getSecond();
+        fpsDom.innerHTML = `${fps} fps / ${(window.performance.now() - now).toFixed(4)}ms window: ${
+          window.innerWidth
+        }x${window.innerHeight} canvas: ${CANVAS_WIDTH}x${CANVAS_HEIGHT} pixel ratio: ${PIXEL_RATIO}`;
+        fps = 0;
       }
     };
 
@@ -329,11 +336,11 @@
       moveBackground(timestamp, timestamp - previousTimestamp);
       movePlayer();
       moveObstacles();
-      detectCollisions(timestamp);
-      increaseScoreAndHealth(timestamp);
+      detectCollisions();
+      increaseScoreAndHealth();
       emptyCanvas();
-      renderBackground(timestamp);
-      renderPlayer(timestamp);
+      renderBackground();
+      renderPlayer();
       renderObstacles(timestamp);
       renderScore();
       renderHealth();
