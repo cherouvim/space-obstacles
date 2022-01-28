@@ -27,15 +27,11 @@
   const CANVAS_TOP_PAD = CANVAS_MAX_SIZE < window.innerHeight ? round((window.innerHeight - CANVAS_MAX_SIZE) / 2) : 0;
   const BACKGROUND_ITEMS_COUNT = 200;
 
-  // ***************************** GAME VARIABLES *****************************
+  // **************************** GLOBAL VARIABLES ****************************
   let canvas;
   let context;
   let mouseX = CANVAS_WIDTH / 2;
   let mouseY = CANVAS_HEIGHT / 2;
-  let backgroundDX = 0;
-  let backgroundDY = 0;
-  let score = 0;
-  let health = 100;
 
   // ****************************** DOM ELEMENTS ******************************
   const fpsDom = createElementFromHTML(
@@ -122,6 +118,9 @@
   };
 
   const runGame = itemsCount => {
+    let score = 0;
+    let health = 100;
+
     const backgroundItems = [];
     for (let i = 0; i < BACKGROUND_ITEMS_COUNT; i++) {
       backgroundItems[i] = generateRandomBackgroundItem(true);
@@ -165,6 +164,8 @@
       context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     };
 
+    let backgroundDX = 0;
+    let backgroundDY = 0;
     const moveBackground = (timestamp, timeDiff) => {
       if (floor(timestamp) % 10 === 0) {
         backgroundDX = cos(timestamp / 10000);
