@@ -53,20 +53,20 @@
   );
   document.getElementById("content").append(healthDom);
 
-  const loader = createElementFromHTML(`<div id="loader" style="display: none"></div>`);
-  document.getElementById("content").append(loader);
+  const loaderDom = createElementFromHTML(`<div id="loader" style="display: none"></div>`);
+  document.getElementById("content").append(loaderDom);
 
-  const splash = createElementFromHTML(
+  const splashDom = createElementFromHTML(
     `<div id="splash" style="display: none"><span class="logo">Space Obstacles</span><br/></div>`
   );
   const splashIcons = ["🚀", "👽", "🪐", "☄️", "⭐", "👾", "✨", "🌌"]
     .filter(character => characterIsSupported(character))
     .map(character => createElementFromHTML(`<span class="icon">${character}</span>`));
-  splashIcons.forEach(splashIcon => splash.append(splashIcon));
-  document.getElementById("content").append(splash);
+  splashIcons.forEach(splashIcon => splashDom.append(splashIcon));
+  document.getElementById("content").append(splashDom);
 
-  const message = createElementFromHTML(`<div id="message" style="display: none"></div>`);
-  document.getElementById("content").append(message);
+  const messageDom = createElementFromHTML(`<div id="message" style="display: none"></div>`);
+  document.getElementById("content").append(messageDom);
 
   // ********************** GAME SCENE OR LOGIC FUNCTIONS **********************
   const calculateObstacleLevels = () =>
@@ -401,40 +401,40 @@
   };
 
   const displayPercentLoader = percent => {
-    loader.innerHTML = percent + "%";
+    loaderDom.innerHTML = percent + "%";
     if (percent === 0) {
       console.log("Loading 0%");
-      loader.style.display = "block";
+      loaderDom.style.display = "block";
     }
     if (percent === 100) {
       console.log("Loading 100%");
-      loader.style.opacity = 0;
-      setTimeout(() => (loader.style.display = "none"), 2000);
+      loaderDom.style.opacity = 0;
+      setTimeout(() => (loaderDom.style.display = "none"), 2000);
     }
   };
 
   const displayErrorAndRetryButton = () => {
     console.log("Error. Please try again");
-    message.innerHTML = 'Error loading assets &#x1F631. Please <a href="/">try again!</a>';
-    message.style.display = "block";
+    messageDom.innerHTML = 'Error loading assets &#x1F631. Please <a href="/">try again!</a>';
+    messageDom.style.display = "block";
   };
 
   const showSplashLogo = () => {
     window.requestAnimationFrame(() => {
-      splash.style.display = "block";
-      splash.style.top = "-10vh";
+      splashDom.style.display = "block";
+      splashDom.style.top = "-10vh";
       window.requestAnimationFrame(() => {
-        splash.style.top = "25vh";
+        splashDom.style.top = "25vh";
       });
     });
   };
 
   const hideSplashLogo = () => {
     window.setTimeout(() => {
-      splash.classList.add("out");
-      splash.style.opacity = 0;
-      splash.style.top = "-20vh";
-      window.setTimeout(() => (splash.style.display = "none"), 5000); // Fully remove it after a while.
+      splashDom.classList.add("out");
+      splashDom.style.opacity = 0;
+      splashDom.style.top = "-20vh";
+      window.setTimeout(() => (splashDom.style.display = "none"), 5000); // Fully remove it after a while.
     }, 1000); // Delay "hide" just to make sure that CSS transition of "show" has finished.
   };
 
