@@ -34,12 +34,25 @@
   let mouseY = CANVAS_HEIGHT / 2;
   let backgroundDX = 0;
   let backgroundDY = 0;
+  let score = 0;
+  let health = 100;
+  let lastCollidingItem = undefined;
 
   // ****************************** DOM ELEMENTS ******************************
   const fps = createElementFromHTML(
     `<span style="font-family: sans-serif; opacity: 0.5; background: #fff; position: fixed; top: 0; left: 0"></span>`
   );
   document.getElementById("content").append(fps);
+
+  const scoreDom = createElementFromHTML(
+    `<span style="font-family: sans-serif; opacity: 1; background: #fff; position: fixed; top: 0; right: 0"></span>`
+  );
+  document.getElementById("content").append(scoreDom);
+
+  const healthDom = createElementFromHTML(
+    `<span style="font-family: sans-serif; opacity: 1; background: #fff; position: fixed; top: 2em; right: 0"></span>`
+  );
+  document.getElementById("content").append(healthDom);
 
   const loader = createElementFromHTML(`<div id="loader" style="display: none"></div>`);
   document.getElementById("content").append(loader);
@@ -191,13 +204,29 @@
       }
     };
 
-    const calculateCollisions = () => {
+    const detectCollisions = timestamp => {
+      console.log(health);
+      const collidingItem = getCollidingItem();
+      if (collidingItem && collidingItem !== lastCollidingItem) {
+        console.log("Detected player collision with " + collidingItem.data.name);
+        health = max(health - collidingItem.data.damage, 0);
+        // TODO: play damage sound
+      }
+      lastCollidingItem = collidingItem;
+    };
+
+    let lastSecond = undefined;
+    const increaseScoreAndHealth = timestamp => {
+      if (lastSecond) health = min(health + floor(timestamp / 1000) - lastSecond, 100);
+      if (lastSecond) score += (floor(timestamp / 1000) - lastSecond) * 10;
+      lastSecond = floor(timestamp / 1000);
+    };
+
+    const getCollidingItem = () => {
       for (let i = 0; i < itemsCount; i++) {
         const item = items[i];
         if (sqrt(pow(item.x - player.x, 2) + pow(item.y - player.y, 2)) < player.radiusPixels + item.radiusPixels) {
-          console.log("Detected player collision with " + item.data.name);
-          // item.data.sound.play();
-          // return item;
+          return item;
         }
       }
     };
@@ -271,6 +300,18 @@
       }
     };
 
+    const renderScore = () => {
+      scoreDom.innerHTML = `score: ${score}`;
+    };
+
+    const renderHealth = () => {
+      healthDom.innerHTML = `health: ${health}`;
+    };
+
+    const gameover = () => {
+      console.log("Game over!");
+    };
+
     const calculateAndRenderFPS = now => {
       count++;
       if (second !== getSecond()) {
@@ -283,20 +324,26 @@
     };
 
     let previousTimestamp = 0;
-
     function gameLoop(timestamp) {
       const now = window.performance.now();
       moveBackground(timestamp, timestamp - previousTimestamp);
       movePlayer();
       moveObstacles();
-      calculateCollisions();
+      detectCollisions(timestamp);
+      increaseScoreAndHealth(timestamp);
       emptyCanvas();
       renderBackground(timestamp);
       renderPlayer(timestamp);
       renderObstacles(timestamp);
+      renderScore();
+      renderHealth();
       calculateAndRenderFPS(now);
+      if (health === 0) {
+        gameover();
+      } else {
+        window.requestAnimationFrame(gameLoop);
+      }
       previousTimestamp = timestamp;
-      window.requestAnimationFrame(gameLoop);
     }
     window.requestAnimationFrame(timestamp => {
       gameLoop(timestamp);
