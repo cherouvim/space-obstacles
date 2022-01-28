@@ -117,7 +117,9 @@
     return item;
   };
 
-  const runGame = itemsCount => {
+  const startNewGame = () => {
+    console.log("Starting new game");
+    const itemsCount = 50; // TODO: Remove and implement levels.
     let score = 0;
     let health = 100;
 
@@ -316,6 +318,12 @@
 
     const gameover = () => {
       console.log("Game over!");
+      messageDom.innerHTML = "Game Over! Score: " + score + "<br/><a href='#'>Play again!</a>";
+      messageDom.querySelector("a").onclick = () => {
+        messageDom.style.display = "none";
+        startNewGame();
+      };
+      messageDom.style.display = "block";
     };
 
     let fps = 0;
@@ -440,10 +448,9 @@
   };
 
   const startGame = () => {
-    console.log("Starting game");
     // playBackgroundMusic();
     initializeCanvas();
-    runGame(50);
+    startNewGame();
   };
 
   // ******************************* START GAME *******************************
