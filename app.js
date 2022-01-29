@@ -332,9 +332,12 @@
       fps++;
       if (fpsTick !== getSecond()) {
         fpsTick = getSecond();
-        fpsDom.innerHTML = `${fps} fps / ${(window.performance.now() - now).toFixed(4)}ms window: ${
-          window.innerWidth
-        }x${window.innerHeight} canvas: ${CANVAS_WIDTH}x${CANVAS_HEIGHT} pixel ratio: ${PIXEL_RATIO}`;
+        fpsDom.innerHTML =
+          `${fps} fps / ${(window.performance.now() - now).toFixed(4)}ms<br/>` +
+          `canvas: ${CANVAS_WIDTH}x${CANVAS_HEIGHT}<br/>` +
+          `window.innerWidth: ${window.innerWidth}x${window.innerHeight}<br/>` +
+          `window.outerWidth: ${window.outerWidth}x${window.outerHeight}<br/>` +
+          `pixel ratio: ${PIXEL_RATIO}`;
         fps = 0;
       }
     };
