@@ -15,37 +15,28 @@
 
   const getSecond = () => floor(new Date().getTime() / 1000);
 
-  let resizeText = "";
-  window.onresize = () =>
-    (resizeText +=
-      "<br/>resize inner: " +
-      window.innerWidth +
-      " " +
-      window.innerHeight +
-      " outer: " +
-      window.outerWidth +
-      " " +
-      window.outerHeight);
-
   // ***************************** GAME CONSTANTS *****************************
   const PIXEL_RATIO = window.devicePixelRatio || 1;
   const CANVAS_MAX_SIZE = 1200;
   const CANVAS_BACKGROUND_COLOR = "#222";
-  const CANVAS_WIDTH = min(CANVAS_MAX_SIZE, window.innerWidth) * PIXEL_RATIO;
-  const CANVAS_HEIGHT = min(CANVAS_MAX_SIZE, window.innerHeight) * PIXEL_RATIO;
-  const CANVAS_CSS_WIDTH = min(CANVAS_MAX_SIZE, window.innerWidth);
-  const CANVAS_CSS_HEIGHT = min(CANVAS_MAX_SIZE, window.innerHeight);
-  const CANVAS_LEFT_PAD = CANVAS_MAX_SIZE < window.innerWidth ? round((window.innerWidth - CANVAS_MAX_SIZE) / 2) : 0;
-  const CANVAS_TOP_PAD = CANVAS_MAX_SIZE < window.innerHeight ? round((window.innerHeight - CANVAS_MAX_SIZE) / 2) : 0;
   const BACKGROUND_ITEMS_COUNT = 200;
 
   // **************************** GLOBAL VARIABLES ****************************
-  let canvas;
-  let context;
-  let mouseX = CANVAS_WIDTH / 2;
-  let mouseY = CANVAS_HEIGHT / 2;
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+  let canvasWidth;
+  let canvasHeight;
+  let canvasCssWidth;
+  let canvasCssHeight;
+  let canvasLeftPad;
+  let canvasTopPad;
+  let mouseX;
+  let mouseY;
+  let resizeText = "";
 
   // ****************************** DOM ELEMENTS ******************************
+  document.getElementById("content").prepend(canvas);
+
   const fpsDom = createElementFromHTML(
     `<span style="font-family: sans-serif; opacity: 0.5; background: #fff; position: fixed; top: 0; left: 0"></span>`
   );
@@ -94,33 +85,56 @@
     window.GAME.data.obstacles.sort((obstacleA, obstacleB) => obstacleA.level - obstacleB.level);
 
   const initializeCanvas = () => {
-    canvas = document.createElement("canvas");
-    context = canvas.getContext("2d");
-    canvas.width = CANVAS_WIDTH; // The actual pixels rendered through this canvas.
-    canvas.height = CANVAS_HEIGHT; // The actual pixels rendered through this canvas.
-    canvas.style.width = CANVAS_CSS_WIDTH + "px";
-    canvas.style.height = CANVAS_CSS_HEIGHT + "px";
-    // context.imageSmoothingEnabled = false;
-    canvas.style.marginLeft = CANVAS_LEFT_PAD + "px";
-    canvas.style.marginTop = CANVAS_TOP_PAD + "px";
-    document.getElementById("content").prepend(canvas);
+    console.log("Initializing canvas");
+    canvasWidth = min(CANVAS_MAX_SIZE, window.innerWidth) * PIXEL_RATIO;
+    canvasHeight = min(CANVAS_MAX_SIZE, window.innerHeight) * PIXEL_RATIO;
+    canvasCssWidth = min(CANVAS_MAX_SIZE, window.innerWidth);
+    canvasCssHeight = min(CANVAS_MAX_SIZE, window.innerHeight);
+    canvasLeftPad = CANVAS_MAX_SIZE < window.innerWidth ? round((window.innerWidth - CANVAS_MAX_SIZE) / 2) : 0;
+    canvasTopPad = CANVAS_MAX_SIZE < window.innerHeight ? round((window.innerHeight - CANVAS_MAX_SIZE) / 2) : 0;
 
+    mouseX = canvasWidth / 2;
+    mouseY = canvasHeight / 2;
+
+    canvas.width = canvasWidth; // The actual pixels rendered through this canvas.
+    canvas.height = canvasHeight; // The actual pixels rendered through this canvas.
+    canvas.style.width = canvasCssWidth + "px";
+    canvas.style.height = canvasCssHeight + "px";
+    // context.imageSmoothingEnabled = false;
+    canvas.style.marginLeft = canvasLeftPad + "px";
+    canvas.style.marginTop = canvasTopPad + "px";
+  };
+
+  const attachEventListeners = () => {
+    console.log("Attaching event listeners.");
     window.addEventListener("mousemove", e => {
-      mouseX = e.clientX * PIXEL_RATIO - CANVAS_LEFT_PAD;
-      mouseY = e.clientY * PIXEL_RATIO - CANVAS_TOP_PAD;
+      mouseX = e.clientX * PIXEL_RATIO - canvasLeftPad;
+      mouseY = e.clientY * PIXEL_RATIO - canvasTopPad;
     });
     canvas.addEventListener("touchmove", e => {
-      mouseX = e.touches[0].clientX * PIXEL_RATIO - CANVAS_LEFT_PAD;
-      mouseY = e.touches[0].clientY * PIXEL_RATIO - CANVAS_TOP_PAD;
+      mouseX = e.touches[0].clientX * PIXEL_RATIO - canvasLeftPad;
+      mouseY = e.touches[0].clientY * PIXEL_RATIO - canvasTopPad;
+    });
+    window.addEventListener("resize", () => {
+      resizeText +=
+        "<br/>resize inner: " +
+        window.innerWidth +
+        " " +
+        window.innerHeight +
+        " outer: " +
+        window.outerWidth +
+        " " +
+        window.outerHeight;
+      initializeCanvas();
     });
   };
 
   const generateRandomBackgroundItem = () => {
     const proximity = random(); // 0.1 is far away, 0.7 is close.
     const item = {
-      x: random() * CANVAS_WIDTH,
-      y: random() * CANVAS_HEIGHT,
-      sizex: round((CANVAS_WIDTH / 500) * proximity * 5 + 1),
+      x: random() * canvasWidth,
+      y: random() * canvasHeight,
+      sizex: round((canvasWidth / 500) * proximity * 5 + 1),
       speed: proximity,
       image: new Image(),
       opacity: proximity * 0.5 + 0.1
@@ -141,13 +155,13 @@
     }
 
     const player = {
-      x: CANVAS_WIDTH / 2,
-      y: CANVAS_HEIGHT / 2,
-      sizex: round((CANVAS_WIDTH / 100) * window.GAME.data.players[0].size),
+      x: canvasWidth / 2,
+      y: canvasHeight / 2,
+      sizex: round((canvasWidth / 100) * window.GAME.data.players[0].size),
       data: window.GAME.data.players[0],
       image: new Image(),
       radiusPixels:
-        round(CANVAS_WIDTH * (window.GAME.data.players[0].size / 100) * (window.GAME.data.players[0].radius / 100)) / 2
+        round(canvasWidth * (window.GAME.data.players[0].size / 100) * (window.GAME.data.players[0].radius / 100)) / 2
     };
     player.image.src = player.data.image;
 
@@ -159,15 +173,15 @@
       const obstacle = window.GAME.data.obstacles[i % window.GAME.data.obstacles.length];
 
       items[i] = {
-        x: CANVAS_WIDTH / 2,
-        y: CANVAS_HEIGHT / 2,
+        x: canvasWidth / 2,
+        y: canvasHeight / 2,
         dx: random() * 6 - 3,
         dy: random() * 6 - 3,
-        sizex: round((CANVAS_WIDTH / 100) * obstacle.size),
+        sizex: round((canvasWidth / 100) * obstacle.size),
         data: obstacle,
         image: new Image(),
         opacity: 1,
-        radiusPixels: round(CANVAS_WIDTH * (obstacle.size / 100) * (obstacle.radius / 100)) / 2
+        radiusPixels: round(canvasWidth * (obstacle.size / 100) * (obstacle.radius / 100)) / 2
       };
       items[i].image.src = obstacle.image;
     }
@@ -175,7 +189,7 @@
     const emptyCanvas = () => {
       context.globalAlpha = 1;
       context.fillStyle = CANVAS_BACKGROUND_COLOR;
-      context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+      context.fillRect(0, 0, canvasWidth, canvasHeight);
     };
 
     let backgroundDX = 0;
@@ -188,8 +202,8 @@
       backgroundItems.forEach(item => {
         item.x += ((item.speed * timeDiff) / 5) * backgroundDX;
         item.y += ((item.speed * timeDiff) / 5) * backgroundDY;
-        item.x = (item.x + CANVAS_WIDTH) % CANVAS_WIDTH;
-        item.y = (item.y + CANVAS_HEIGHT) % CANVAS_HEIGHT;
+        item.x = (item.x + canvasWidth) % canvasWidth;
+        item.y = (item.y + canvasHeight) % canvasHeight;
       });
     };
 
@@ -198,8 +212,8 @@
       player.y += ((mouseY || 0) - player.y) / 8;
       if (player.x < player.radiusPixels) player.x = player.radiusPixels;
       if (player.y < player.radiusPixels) player.y = player.radiusPixels;
-      if (player.x > CANVAS_WIDTH - player.radiusPixels) player.x = CANVAS_WIDTH - player.radiusPixels;
-      if (player.y > CANVAS_HEIGHT - player.radiusPixels) player.y = CANVAS_HEIGHT - player.radiusPixels;
+      if (player.x > canvasWidth - player.radiusPixels) player.x = canvasWidth - player.radiusPixels;
+      if (player.y > canvasHeight - player.radiusPixels) player.y = canvasHeight - player.radiusPixels;
     };
 
     const moveObstacles = () => {
@@ -207,9 +221,9 @@
         const item = items[i];
         item.x += item.dx;
         item.y += item.dy;
-        if (item.x - item.radiusPixels + item.dx < 0 || item.x + item.radiusPixels + item.dx > CANVAS_WIDTH)
+        if (item.x - item.radiusPixels + item.dx < 0 || item.x + item.radiusPixels + item.dx > canvasWidth)
           item.dx = -item.dx;
-        if (item.y - item.radiusPixels + item.dy < 0 || item.y + item.radiusPixels + item.dy > CANVAS_HEIGHT)
+        if (item.y - item.radiusPixels + item.dy < 0 || item.y + item.radiusPixels + item.dy > canvasHeight)
           item.dy = -item.dy;
         // item.opacity = timestamp % 500 < 250 ? 1 : 0.5; // blink
       }
@@ -346,7 +360,7 @@
         fpsTick = getSecond();
         fpsDom.innerHTML =
           `${fps} fps / ${(window.performance.now() - now).toFixed(4)}ms<br/>` +
-          `canvas: ${CANVAS_WIDTH}x${CANVAS_HEIGHT}<br/>` +
+          `canvas: ${canvasWidth}x${canvasHeight}<br/>` +
           `window.innerWidth: ${window.innerWidth}x${window.innerHeight}<br/>` +
           `window.outerWidth: ${window.outerWidth}x${window.outerHeight}<br/>` +
           `pixel ratio: ${PIXEL_RATIO}` +
@@ -465,6 +479,7 @@
 
   const startGame = () => {
     // playBackgroundMusic();
+    attachEventListeners();
     initializeCanvas();
     startNewGame();
   };

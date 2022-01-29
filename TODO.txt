@@ -9,7 +9,6 @@ TODOs
 - sounds
 - scoring improvement. player on boundaries gains less score.
 - high score (local storage)
-- fix black bars on installed PWA
 
 IMPROVE
 - score UI
@@ -22,13 +21,12 @@ IMPROVE
 MAYBE/FUTURE
 - use cloudflare
 - webp
-- lock orientation on PWA?
-- refresh canvas on rotate?
 
 NO/IGNORE
 - github link
 
 DONE
+- lock orientation on PWA? NO.
 - splash screen
 - calculate game screen (max X, Y -> resize/scale canvas on more than that, or simply center a bounded box).
 - loader UI
