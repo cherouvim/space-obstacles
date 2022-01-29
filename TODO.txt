@@ -17,6 +17,7 @@ IMPROVE
 - conditional rounding (rounding vs no rounding [subpixel rendering]) based on performance
 - full refresh on redeployment
 - hide fps, or provide a way to toggle, or show as a bottom left discreet small semi transparent green cool looking fsp meter
+- resizing canvas needs to recalculate sizex, sizey, and radiusPixels of all elements
 
 MAYBE/FUTURE
 - use cloudflare
