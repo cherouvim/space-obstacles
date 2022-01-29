@@ -85,7 +85,7 @@
     window.GAME.data.obstacles.sort((obstacleA, obstacleB) => obstacleA.level - obstacleB.level);
 
   const initializeCanvas = () => {
-    console.log("Initializing canvas");
+    console.log("Initializing canvas.");
     canvasWidth = min(CANVAS_MAX_SIZE, window.innerWidth) * PIXEL_RATIO;
     canvasHeight = min(CANVAS_MAX_SIZE, window.innerHeight) * PIXEL_RATIO;
     canvasCssWidth = min(CANVAS_MAX_SIZE, window.innerWidth);
@@ -144,7 +144,7 @@
   };
 
   const startNewGame = () => {
-    console.log("Starting new game");
+    console.log("Starting new game.");
     const itemsCount = 50; // TODO: Remove and implement levels.
     let score = 0;
     let health = 100;
@@ -343,7 +343,7 @@
     };
 
     const gameover = () => {
-      console.log("Game over!");
+      console.log("Game Over.");
       messageDom.innerHTML = "Game Over!&nbsp;&nbsp;<button>Play again ⟳</button>";
       messageDom.querySelector("button").onclick = () => {
         messageDom.style.display = "none";
@@ -417,7 +417,7 @@
           functionsToExecuteWhenAllAssetsHaveLoaded.forEach(functionToExecute => functionToExecute());
       };
       item.imageElement.onerror = () => {
-        console.log("ERROR loading image");
+        console.log("Error loading image for " + item.name + ".");
         onAssetLoadError();
       };
       item.imageElement.src = item.image;
@@ -432,7 +432,7 @@
             functionsToExecuteWhenAllAssetsHaveLoaded.forEach(functionToExecute => functionToExecute());
         },
         onloaderror: () => {
-          console.log("ERROR loading sound");
+          console.log("Error loading sound for " + item.name + ".");
           onAssetLoadError();
         }
       });
@@ -453,7 +453,7 @@
   };
 
   const displayErrorAndRetryButton = () => {
-    console.log("Error. Please try again");
+    console.log("Error loading assets. Please try again.");
     messageDom.innerHTML = 'Error loading assets &#x1F631. Please <a href="/">try again!</a>';
     messageDom.style.display = "block";
   };
