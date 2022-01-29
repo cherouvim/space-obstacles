@@ -32,6 +32,7 @@
   let context;
   let mouseX = CANVAS_WIDTH / 2;
   let mouseY = CANVAS_HEIGHT / 2;
+  let resizeText = "";
 
   // ****************************** DOM ELEMENTS ******************************
   const fpsDom = createElementFromHTML(
@@ -337,10 +338,21 @@
           `canvas: ${CANVAS_WIDTH}x${CANVAS_HEIGHT}<br/>` +
           `window.innerWidth: ${window.innerWidth}x${window.innerHeight}<br/>` +
           `window.outerWidth: ${window.outerWidth}x${window.outerHeight}<br/>` +
-          `pixel ratio: ${PIXEL_RATIO}`;
+          `pixel ratio: ${PIXEL_RATIO}` +
+          resizeText;
         fps = 0;
       }
     };
+    window.onresize = () =>
+      (resizeText +=
+        "<br/>resize inner: " +
+        window.innerWidth +
+        " " +
+        window.innerHeight +
+        " outer: " +
+        window.outerWidth +
+        " " +
+        window.outerHeight);
 
     let previousTimestamp = 0;
     function gameLoop(timestamp) {
