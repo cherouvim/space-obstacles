@@ -15,6 +15,18 @@
 
   const getSecond = () => floor(new Date().getTime() / 1000);
 
+  let resizeText = "";
+  window.onresize = () =>
+    (resizeText +=
+      "<br/>resize inner: " +
+      window.innerWidth +
+      " " +
+      window.innerHeight +
+      " outer: " +
+      window.outerWidth +
+      " " +
+      window.outerHeight);
+
   // ***************************** GAME CONSTANTS *****************************
   const PIXEL_RATIO = window.devicePixelRatio || 1;
   const CANVAS_MAX_SIZE = 1200;
@@ -32,7 +44,6 @@
   let context;
   let mouseX = CANVAS_WIDTH / 2;
   let mouseY = CANVAS_HEIGHT / 2;
-  let resizeText = "";
 
   // ****************************** DOM ELEMENTS ******************************
   const fpsDom = createElementFromHTML(
@@ -343,16 +354,6 @@
         fps = 0;
       }
     };
-    window.onresize = () =>
-      (resizeText +=
-        "<br/>resize inner: " +
-        window.innerWidth +
-        " " +
-        window.innerHeight +
-        " outer: " +
-        window.outerWidth +
-        " " +
-        window.outerHeight);
 
     let previousTimestamp = 0;
     function gameLoop(timestamp) {
