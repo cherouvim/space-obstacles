@@ -1,12 +1,21 @@
 TODOs
-- scores/health UI
-- enemies
-- levels
+- enemies entering scene from outside
+- levels or linear difficulty increase
+- empty canvas black palette animation
+- encode inertia into player data
+- encode trembling into player data
+- implement player trembling
+- collision feedback (visual, auditory)
+- sounds
 
 IMPROVE
+- score UI
+- health UI
+- gameover screen with button
 - favicon
 - conditional rounding (rounding vs no rounding [subpixel rendering]) based on performance
 - full refresh on redeployment
+- hide fps, or provide a way to toggle, or show as a bottom left discreet small semi transparent green cool looking fsp meter
 
 MAYBE/FUTURE
 - use cloudflare
