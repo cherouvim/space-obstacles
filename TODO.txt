@@ -7,6 +7,8 @@ TODOs
 - implement player trembling
 - collision feedback (visual, auditory)
 - sounds
+- scoring improvement. player on boundaries gains less score.
+- high score (local storage)
 
 IMPROVE
 - score UI
