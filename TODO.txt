@@ -14,7 +14,6 @@ TODOs
 IMPROVE
 - score UI
 - health UI
-- gameover screen with button
 - favicon
 - conditional rounding (rounding vs no rounding [subpixel rendering]) based on performance
 - full refresh on redeployment

@@ -330,8 +330,8 @@
 
     const gameover = () => {
       console.log("Game over!");
-      messageDom.innerHTML = "Game Over! Score: " + score + "<br/><a href='#'>Play again!</a>";
-      messageDom.querySelector("a").onclick = () => {
+      messageDom.innerHTML = "Game Over!&nbsp;&nbsp;<button>Play again ⟳</button>";
+      messageDom.querySelector("button").onclick = () => {
         messageDom.style.display = "none";
         startNewGame();
       };

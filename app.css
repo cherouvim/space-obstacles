@@ -65,7 +65,7 @@ body {
   position: absolute;
   top: 45vh;
   left: 0;
-  filter: drop-shadow(7px 7px 2rem #aa2);
+  filter: drop-shadow(0 0 6rem #f66) drop-shadow(0 0 2rem #aa2);
   width: 100%;
   text-align: center;
   background: #1f1f1f;
@@ -75,6 +75,20 @@ body {
 #message a,
 #message a:visited {
   color: #fff;
+}
+#message button {
+  line-height: 1.5em;
+  vertical-align: middle;
+  font-size: 1.2em;
+  color: #000;
+  background: rgb(243 212 0);
+  border-radius: 0.5em;
+  border: 2px solid #91730dbd;
+  padding: 0.1em 0.3em;
+  cursor: pointer;
+}
+#message button:hover {
+  background: rgb(255 242 40);
 }
 canvas {
   opacity: 0;
