@@ -261,13 +261,18 @@
       lastCollidingItem = collidingItem;
     };
 
-    let previousHealthTick = getSecond();
-    const increaseScoreAndHealth = () => {
-      const healthTick = getSecond();
+    let previousHealthTick = 0;
+    let previousScoreTick = 0;
+    const increaseHealthAndScore = timestamp => {
+      const healthTick = floor(timestamp / 1000);
       if (healthTick !== previousHealthTick) {
         health = min(health + (healthTick - previousHealthTick) * 1, 100);
-        score += (healthTick - previousHealthTick) * 10;
         previousHealthTick = healthTick;
+      }
+      const scoreTick = floor(timestamp / 500);
+      if (scoreTick !== previousScoreTick) {
+        score += (scoreTick - previousScoreTick) * 5;
+        previousScoreTick = scoreTick;
       }
     };
 
@@ -383,7 +388,7 @@
       movePlayer();
       moveObstacles();
       detectCollisions();
-      increaseScoreAndHealth();
+      increaseHealthAndScore(timestamp);
       emptyCanvas();
       renderBackground();
       renderPlayer();
