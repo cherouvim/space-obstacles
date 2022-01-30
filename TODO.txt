@@ -21,7 +21,6 @@ MAYBE
 - conditional rounding (rounding vs no rounding [subpixel rendering]) based on performance
 - use cloudflare
 - webp
-- 404 page?
 
 NO/IGNORE
 - github link
