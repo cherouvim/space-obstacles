@@ -124,8 +124,14 @@ canvas {
     rgba(255, 0, 0, 1) 100%
   ); */
   /* https://cssgradient.io/ */
-  background: rgb(2,0,36);
-  background: linear-gradient(0deg, rgb(0,0,0) 0%, rgb(230,66,110) 20%, rgb(238,147,79) 80%, rgb(255,255,255) 100%);  
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    0deg,
+    rgb(0, 0, 0) 0%,
+    rgb(230, 66, 110) 20%,
+    rgb(238, 147, 79) 80%,
+    rgb(255, 255, 255) 100%
+  );
   height: calc(100% - 0.5vh);
   max-width: calc(100% - 0.5vh);
   margin: 0.25vh;
