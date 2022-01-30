@@ -38,7 +38,7 @@
   document.getElementById("content").prepend(canvas);
 
   const fpsDom = createElementFromHTML(
-    `<span style="font-family: sans-serif; opacity: 0.5; background: #fff; position: fixed; top: 0; left: 0"></span>`
+    `<span style="font-family: sans-serif; opacity: 0.5; background: #fff; position: fixed; bottom: 0; left: 0"></span>`
   );
   document.getElementById("content").append(fpsDom);
 
@@ -47,10 +47,9 @@
   );
   document.getElementById("content").append(scoreDom);
 
-  const healthDom = createElementFromHTML(
-    `<span style="font-family: sans-serif; opacity: 1; background: #fff; position: fixed; top: 2em; right: 0"></span>`
-  );
+  const healthDom = createElementFromHTML(`<div id="health"><span></span></div>`);
   document.getElementById("content").append(healthDom);
+  const healthDomContent = healthDom.querySelector("span");
 
   const loaderDom = createElementFromHTML(`<div id="loader" style="display: none"></div>`);
   document.getElementById("content").append(loaderDom);
@@ -85,13 +84,18 @@
     window.GAME.data.obstacles.sort((obstacleA, obstacleB) => obstacleA.level - obstacleB.level);
 
   const initializeCanvas = () => {
-    console.log("Initializing canvas.");
+    console.log("Initializing canvas (and some other HTML elements).");
     canvasWidth = min(CANVAS_MAX_SIZE, window.innerWidth) * PIXEL_RATIO;
     canvasHeight = min(CANVAS_MAX_SIZE, window.innerHeight) * PIXEL_RATIO;
     canvasCssWidth = min(CANVAS_MAX_SIZE, window.innerWidth);
     canvasCssHeight = min(CANVAS_MAX_SIZE, window.innerHeight);
     canvasLeftPad = CANVAS_MAX_SIZE < window.innerWidth ? round((window.innerWidth - CANVAS_MAX_SIZE) / 2) : 0;
     canvasTopPad = CANVAS_MAX_SIZE < window.innerHeight ? round((window.innerHeight - CANVAS_MAX_SIZE) / 2) : 0;
+
+    healthDom.style.marginTop = canvasTopPad + "px";
+    healthDom.style.marginLeft = canvasLeftPad + "px";
+    healthDom.style.width = canvasWidth / 3 + "px";
+    healthDom.style.opacity = 1;
 
     mouseX = canvasWidth / 2;
     mouseY = canvasHeight / 2;
@@ -339,7 +343,7 @@
     };
 
     const renderHealth = () => {
-      healthDom.innerHTML = `health: ${health}`;
+      healthDomContent.style.width = health + "%";
     };
 
     const gameover = () => {

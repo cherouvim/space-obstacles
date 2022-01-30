@@ -82,7 +82,7 @@ body {
   font-size: 1.2em;
   color: #000;
   background: rgb(243 212 0);
-  border-radius: 0.5em;
+  border-radius: 1vw;
   border: 2px solid #91730dbd;
   padding: 0.1em 0.3em;
   cursor: pointer;
@@ -94,4 +94,40 @@ canvas {
   opacity: 0;
   transition: opacity 2.5s linear;
   cursor: crosshair;
+}
+#health {
+  position: fixed;
+  left: 1vw;
+  top: 1vw;
+  border: 0.25vh solid #f0ff081f;
+  border-radius: 0.5vw;
+  height: 5vh;
+  opacity: 0;
+  transition: opacity 4s linear;
+}
+#health span {
+  border-radius: 0.25vw;
+  display: block;
+  /* https://stackoverflow.com/a/63302468/72478
+  background: linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 1) 0%,
+    rgba(255, 154, 0, 1) 10%,
+    rgba(208, 222, 33, 1) 20%,
+    rgba(79, 220, 74, 1) 30%,
+    rgba(63, 218, 216, 1) 40%,
+    rgba(47, 201, 226, 1) 50%,
+    rgba(28, 127, 238, 1) 60%,
+    rgba(95, 21, 242, 1) 70%,
+    rgba(186, 12, 248, 1) 80%,
+    rgba(251, 7, 217, 1) 90%,
+    rgba(255, 0, 0, 1) 100%
+  ); */
+  /* https://cssgradient.io/ */
+  background: rgb(2,0,36);
+  background: linear-gradient(0deg, rgb(0,0,0) 0%, rgb(230,66,110) 20%, rgb(238,147,79) 80%, rgb(255,255,255) 100%);  
+  height: calc(100% - 0.5vh);
+  max-width: calc(100% - 0.5vh);
+  margin: 0.25vh;
+  opacity: 0.8;
 }

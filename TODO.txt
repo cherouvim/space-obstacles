@@ -13,7 +13,6 @@ TODOs
 
 IMPROVE
 - score UI
-- health UI
 - favicon
 - conditional rounding (rounding vs no rounding [subpixel rendering]) based on performance
 - full refresh on redeployment
@@ -28,6 +27,7 @@ NO/IGNORE
 - github link
 
 DONE
+- health UI
 - lock orientation on PWA? NO.
 - splash screen
 - calculate game screen (max X, Y -> resize/scale canvas on more than that, or simply center a bounded box).
