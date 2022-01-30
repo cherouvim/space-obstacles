@@ -13,7 +13,7 @@
 
   const { min, max, random, floor, round, cos, sin, pow, sqrt } = Math;
 
-  const getSecond = () => floor(new Date().getTime() / 1000);
+  const getSecond = () => floor(window.performance.now() / 1000);
 
   // ***************************** GAME CONSTANTS *****************************
   const PIXEL_RATIO = window.devicePixelRatio || 1;
@@ -359,13 +359,14 @@
     };
 
     let fps = 0;
-    let fpsTick = getSecond();
-    const calculateAndRenderFPS = now => {
+    let fpsTick = 0;
+    const calculateAndRenderFPS = workStartTimestamp => {
       fps++;
-      if (fpsTick !== getSecond()) {
-        fpsTick = getSecond();
+      const second = getSecond();
+      if (fpsTick !== second) {
+        fpsTick = second;
         fpsDom.innerHTML =
-          `${fps} fps / ${(window.performance.now() - now).toFixed(4)}ms<br/>` +
+          `${fps} fps / ${(window.performance.now() - workStartTimestamp).toFixed(4)}ms<br/>` +
           `canvas: ${canvasWidth}x${canvasHeight}<br/>` +
           `window.innerWidth: ${window.innerWidth}x${window.innerHeight}<br/>` +
           `window.outerWidth: ${window.outerWidth}x${window.outerHeight}<br/>` +
