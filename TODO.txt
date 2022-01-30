@@ -10,6 +10,7 @@ TODOs
 - scoring improvement. player on boundaries gains less score.
 - high score (local storage)
 - space like player rotation while moving
+- score should not advance when game tab is not active
 
 IMPROVE
 - favicon
