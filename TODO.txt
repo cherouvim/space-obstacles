@@ -12,7 +12,6 @@ TODOs
 - space like player rotation while moving
 
 IMPROVE
-- score UI
 - favicon
 - conditional rounding (rounding vs no rounding [subpixel rendering]) based on performance
 - full refresh on redeployment
@@ -27,6 +26,7 @@ NO/IGNORE
 - github link
 
 DONE
+- score UI
 - health UI
 - lock orientation on PWA? NO.
 - splash screen

@@ -42,9 +42,7 @@
   );
   document.getElementById("content").append(fpsDom);
 
-  const scoreDom = createElementFromHTML(
-    `<span style="font-family: sans-serif; opacity: 1; background: #fff; position: fixed; top: 0; right: 0"></span>`
-  );
+  const scoreDom = createElementFromHTML(`<span id="score"></span>`);
   document.getElementById("content").append(scoreDom);
 
   const healthDom = createElementFromHTML(`<div id="health"><span></span></div>`);
@@ -96,6 +94,10 @@
     healthDom.style.marginLeft = canvasLeftPad + "px";
     healthDom.style.width = canvasCssWidth / 3 + "px";
     healthDom.style.opacity = 1;
+
+    scoreDom.style.marginTop = canvasTopPad + "px";
+    scoreDom.style.marginRight = canvasLeftPad + "px";
+    scoreDom.style.opacity = 1;
 
     mouseX = canvasWidth / 2;
     mouseY = canvasHeight / 2;
@@ -339,7 +341,7 @@
     };
 
     const renderScore = () => {
-      scoreDom.innerHTML = `score: ${score}`;
+      scoreDom.innerHTML = score;
     };
 
     const renderHealth = () => {
