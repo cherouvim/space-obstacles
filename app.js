@@ -94,7 +94,7 @@
 
     healthDom.style.marginTop = canvasTopPad + "px";
     healthDom.style.marginLeft = canvasLeftPad + "px";
-    healthDom.style.width = canvasWidth / 3 + "px";
+    healthDom.style.width = canvasCssWidth / 3 + "px";
     healthDom.style.opacity = 1;
 
     mouseX = canvasWidth / 2;

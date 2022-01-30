@@ -97,8 +97,8 @@ canvas {
 }
 #health {
   position: fixed;
-  left: 1vw;
-  top: 1vw;
+  left: 0.5em;
+  top: 0.5em;
   border: 0.25vh solid #f0ff081f;
   border-radius: 0.5vw;
   height: 5vh;
