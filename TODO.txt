@@ -1,44 +1,27 @@
-TODOs
+TODO
 - enemies entering scene from outside
 - levels or linear difficulty increase
 - empty canvas black palette animation
 - encode inertia into player data
 - encode trembling into player data
 - implement player trembling
-- collision feedback (visual, auditory)
-- sounds
+- obstacle sounds (when entering screen?)
+- visual collision feedback (health border?)
+- auditory collision feedback (damage sound needs new audio)
 - scoring improvement. player on boundaries gains less score.
 - high score (local storage)
 - space like player rotation while moving
 - background, heath + score, obstacles rotation should not use RAF timestamp because they advance when game tab is not active
-
-IMPROVE
-- favicon
-- conditional rounding (rounding vs no rounding [subpixel rendering]) based on performance
-- full refresh on redeployment
+- improve favicon
+- full refresh on redeployment (github pages varnish? assets cache killer?)
 - hide fps, or provide a way to toggle, or show as a bottom left discreet small semi transparent green cool looking fsp meter
 - resizing canvas needs to recalculate sizex, sizey, and radiusPixels of all elements
 
-MAYBE/FUTURE
+MAYBE
+- conditional rounding (rounding vs no rounding [subpixel rendering]) based on performance
 - use cloudflare
 - webp
+- 404 page?
 
 NO/IGNORE
 - github link
-
-DONE
-- score UI
-- health UI
-- lock orientation on PWA? NO.
-- splash screen
-- calculate game screen (max X, Y -> resize/scale canvas on more than that, or simply center a bounded box).
-- loader UI
-- manifest.json metadata
-- SEO metatags
-- evaluate a sound engine (volume, mix, play pause)
-- sounds
-- input rotations, speeds, pallete rotations etc
-- adjust graphics sizes on files? or setup size on data?
-- optimize graphics (png 256 alpha contains extra photo at the corners???)
-- implement x, y & rotate movement based on time
-- implement sizex, sizey based on canvas size
