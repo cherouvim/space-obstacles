@@ -9,6 +9,7 @@ TODOs
 - sounds
 - scoring improvement. player on boundaries gains less score.
 - high score (local storage)
+- space like player rotation while moving
 
 IMPROVE
 - score UI
