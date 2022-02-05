@@ -13,8 +13,6 @@
 
   const { min, max, random, floor, round, cos, sin, pow, sqrt } = Math;
 
-  const getSecond = () => floor(window.performance.now() / 1000);
-
   // ***************************** GAME CONSTANTS *****************************
   const PIXEL_RATIO = window.devicePixelRatio || 1;
   const CANVAS_MAX_SIZE = 1200;
@@ -367,7 +365,7 @@
     let fpsTick = 0;
     const calculateAndRenderFPS = workStartTimestamp => {
       fps++;
-      const second = getSecond();
+      const second = floor(window.performance.now() / 1000);
       if (fpsTick !== second) {
         fpsTick = second;
         fpsDom.innerHTML =
@@ -383,7 +381,7 @@
 
     let previousTimestamp = 0;
     function gameLoop(timestamp) {
-      const now = window.performance.now();
+      const workStartTimestamp = window.performance.now();
       moveBackground(timestamp, timestamp - previousTimestamp);
       movePlayer();
       moveObstacles();
@@ -395,7 +393,7 @@
       renderObstacles(timestamp);
       renderScore();
       renderHealth();
-      calculateAndRenderFPS(now);
+      calculateAndRenderFPS(workStartTimestamp);
       if (health === 0) {
         gameover();
       } else {
