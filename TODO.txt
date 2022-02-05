@@ -11,7 +11,6 @@ TODO
 - scoring improvement. player on boundaries gains less score.
 - high score (local storage)
 - space like player rotation while moving
-- background, heath + score, obstacles rotation should not use RAF timestamp because they advance when game tab is not active
 - improve favicon
 - full refresh on redeployment (github pages varnish? assets cache killer?)
 - hide fps, or provide a way to toggle, or show as a bottom left discreet small semi transparent green cool looking fsp meter

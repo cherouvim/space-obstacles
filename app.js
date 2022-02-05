@@ -222,9 +222,9 @@
       });
     };
 
-    const movePlayer = () => {
-      player.x += ((mouseX || 0) - player.x) / 8;
-      player.y += ((mouseY || 0) - player.y) / 8;
+    const movePlayer = timestampDiff => {
+      player.x += (((mouseX || 0) - player.x) / timestampDiff) * 2;
+      player.y += (((mouseY || 0) - player.y) / timestampDiff) * 2;
       if (player.x < player.radiusPixels) player.x = player.radiusPixels;
       if (player.y < player.radiusPixels) player.y = player.radiusPixels;
       if (player.x > canvasWidth - player.radiusPixels) player.x = canvasWidth - player.radiusPixels;
@@ -402,8 +402,8 @@
       const timestampDiff = timestamp - previousTimestamp;
       const workStartTimestamp = window.performance.now();
       moveBackground(timestamp, timestampDiff);
-      movePlayer();
-      moveObstacles();
+      movePlayer(timestampDiff);
+      moveObstacles(); // TODO: Make use of obstacle.speed together with timestampDiff.
       detectCollisions();
       increaseHealthAndScore(timestamp);
       emptyCanvas();
