@@ -31,6 +31,7 @@
   let mouseX;
   let mouseY;
   let resizeText = "";
+  let timeSpentOnAnotherTab = 0;
 
   // ****************************** DOM ELEMENTS ******************************
   document.getElementById("content").prepend(canvas);
@@ -131,6 +132,16 @@
         window.outerHeight;
       initializeCanvas();
     });
+    let timestampThatUserLeftTab = undefined;
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "hidden") {
+        timestampThatUserLeftTab = Date.now();
+      }
+      if (document.visibilityState === "visible") {
+        timeSpentOnAnotherTab = Date.now() - timestampThatUserLeftTab;
+        console.log("Milliseconds spent on another tab: " + timeSpentOnAnotherTab + ".");
+      }
+    });
   };
 
   const generateRandomBackgroundItem = () => {
@@ -198,14 +209,14 @@
 
     let backgroundDX = 0;
     let backgroundDY = 0;
-    const moveBackground = (timestamp, timeDiff) => {
+    const moveBackground = (timestamp, timestampDiff) => {
       if (floor(timestamp) % 10 === 0) {
         backgroundDX = cos(timestamp / 10000);
         backgroundDY = sin(timestamp / 10000);
       }
       backgroundItems.forEach(item => {
-        item.x += ((item.speed * timeDiff) / 5) * backgroundDX;
-        item.y += ((item.speed * timeDiff) / 5) * backgroundDY;
+        item.x += ((item.speed * timestampDiff) / 5) * backgroundDX;
+        item.y += ((item.speed * timestampDiff) / 5) * backgroundDY;
         item.x = (item.x + canvasWidth) % canvasWidth;
         item.y = (item.y + canvasHeight) % canvasHeight;
       });
@@ -380,9 +391,17 @@
     };
 
     let previousTimestamp = 0;
+    let totalTimeSpentOnAnotherTab = 0;
     function gameLoop(timestamp) {
+      // Reduce timestamp by the total time user spent on another tab. We need this so time based action (background position, player health) does not progress heavily when player returns to the game browser tab after leaving it.
+      if (timeSpentOnAnotherTab) {
+        totalTimeSpentOnAnotherTab += timeSpentOnAnotherTab;
+        timeSpentOnAnotherTab = 0;
+      }
+      timestamp -= totalTimeSpentOnAnotherTab;
+      const timestampDiff = timestamp - previousTimestamp;
       const workStartTimestamp = window.performance.now();
-      moveBackground(timestamp, timestamp - previousTimestamp);
+      moveBackground(timestamp, timestampDiff);
       movePlayer();
       moveObstacles();
       detectCollisions();
