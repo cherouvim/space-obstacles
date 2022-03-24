@@ -36,14 +36,14 @@
   // ****************************** DOM ELEMENTS ******************************
   document.getElementById("content").prepend(canvas);
 
-  const healthDom = createElementFromHTML(`<div id="health"><span></span></div>`);
+  const healthDom = createElementFromHTML(`<div id="health" style="opacity: 0"><span></span></div>`);
   document.getElementById("content").append(healthDom);
   const healthDomContent = healthDom.querySelector("span");
 
-  const scoreDom = createElementFromHTML(`<span id="score"></span>`);
+  const scoreDom = createElementFromHTML(`<span id="score" style="opacity: 0"></span>`);
   document.getElementById("content").append(scoreDom);
 
-  const fpsDom = createElementFromHTML(`<span id="fps"></span>`);
+  const fpsDom = createElementFromHTML(`<span id="fps" style="opacity: 0"></span>`);
   document.getElementById("content").append(fpsDom);
 
   const loaderDom = createElementFromHTML(`<div id="loader" style="display: none"></div>`);
@@ -90,15 +90,15 @@
     healthDom.style.marginTop = canvasTopPad + "px";
     healthDom.style.marginLeft = canvasLeftPad + "px";
     healthDom.style.width = canvasCssWidth / 3 + "px";
-    healthDom.style.opacity = 1;
+    healthDom.style.opacity = null; // Remove initial inline "opacity: 0".
 
     scoreDom.style.marginTop = canvasTopPad + "px";
     scoreDom.style.marginRight = canvasLeftPad + "px";
-    scoreDom.style.opacity = 1;
+    scoreDom.style.opacity = null; // Remove initial inline "opacity: 0".
 
     fpsDom.style.marginBottom = canvasTopPad + "px";
     fpsDom.style.marginRight = canvasLeftPad + "px";
-    fpsDom.style.opacity = 0.5;
+    fpsDom.style.opacity = null; // Remove initial inline "opacity: 0".
 
     mouseX = canvasWidth / 2;
     mouseY = canvasHeight / 2;

@@ -21,7 +21,6 @@ body {
   height: 100%;
 }
 #loader {
-  opacity: 1;
   font-size: 9vw;
   color: #dcb9d4;
   position: absolute;
@@ -34,7 +33,6 @@ body {
   pointer-events: none;
 }
 #splash {
-  opacity: 1;
   position: absolute;
   width: 100%;
   text-align: center;
@@ -104,7 +102,6 @@ canvas {
   border: 0.25vh solid #f0ff081f;
   border-radius: 0.5vw;
   height: 5vh;
-  opacity: 0;
   transition: opacity 4s linear;
   pointer-events: none;
 }
@@ -144,7 +141,6 @@ canvas {
   position: fixed;
   right: 0.5em;
   top: 0.5em;
-  opacity: 0;
   transition: opacity 4s linear;
   color: #e4ff00aa;
   font-size: 5vh;
@@ -161,8 +157,8 @@ canvas {
   color: lime;
   padding: 0.3em;
   text-align: right;
-  opacity: 0;
   transition: opacity 2s;
   filter: drop-shadow(1px 1px 0 rgba(255, 255, 255, 0.5));
   pointer-events: none;
+  opacity: 0.5;
 }
