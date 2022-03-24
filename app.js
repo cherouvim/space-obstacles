@@ -36,9 +36,7 @@
   // ****************************** DOM ELEMENTS ******************************
   document.getElementById("content").prepend(canvas);
 
-  const fpsDom = createElementFromHTML(
-    `<span style="font-family: sans-serif; opacity: 0.5; background: #fff; position: fixed; bottom: 0; left: 0"></span>`
-  );
+  const fpsDom = createElementFromHTML(`<span id="fps"></span>`);
   document.getElementById("content").append(fpsDom);
 
   const scoreDom = createElementFromHTML(`<span id="score"></span>`);
@@ -88,6 +86,10 @@
     canvasCssHeight = min(CANVAS_MAX_SIZE, window.innerHeight);
     canvasLeftPad = CANVAS_MAX_SIZE < window.innerWidth ? round((window.innerWidth - CANVAS_MAX_SIZE) / 2) : 0;
     canvasTopPad = CANVAS_MAX_SIZE < window.innerHeight ? round((window.innerHeight - CANVAS_MAX_SIZE) / 2) : 0;
+
+    fpsDom.style.marginBottom = canvasTopPad + "px";
+    fpsDom.style.marginRight = canvasLeftPad + "px";
+    fpsDom.style.opacity = 0.5;
 
     healthDom.style.marginTop = canvasTopPad + "px";
     healthDom.style.marginLeft = canvasLeftPad + "px";
@@ -386,13 +388,15 @@
       const second = floor(window.performance.now() / 1000);
       if (fpsTick !== second) {
         fpsTick = second;
-        fpsDom.innerHTML =
-          `${fps} fps / ${(window.performance.now() - workStartTimestamp).toFixed(4)}ms<br/>` +
-          `canvas: ${canvasWidth}x${canvasHeight}<br/>` +
-          `window.innerWidth: ${window.innerWidth}x${window.innerHeight}<br/>` +
-          `window.outerWidth: ${window.outerWidth}x${window.outerHeight}<br/>` +
-          `pixel ratio: ${PIXEL_RATIO}` +
-          resizeText;
+        // For dev only:
+        // fpsDom.innerHTML =
+        //   `${fps} fps / ${(window.performance.now() - workStartTimestamp).toFixed(4)}ms<br/>` +
+        //   `canvas: ${canvasWidth}x${canvasHeight}<br/>` +
+        //   `window.innerWidth: ${window.innerWidth}x${window.innerHeight}<br/>` +
+        //   `window.outerWidth: ${window.outerWidth}x${window.outerHeight}<br/>` +
+        //   `pixel ratio: ${PIXEL_RATIO}` +
+        //   resizeText;
+        fpsDom.innerHTML = `${fps} fps`
         fps = 0;
       }
     };

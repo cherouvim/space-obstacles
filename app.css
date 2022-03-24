@@ -95,6 +95,17 @@ canvas {
   transition: opacity 2.5s linear;
   cursor: crosshair;
 }
+#fps {
+  position: fixed;
+  right: 0.5em;
+  bottom: 0.25em;
+  color: lime;
+  padding: 0.3em;
+  text-align: right;
+  opacity: 0;
+  transition: opacity 2s;
+  filter: drop-shadow(1px 1px 0 rgba(255, 255, 255, 0.5));
+}
 #health {
   position: fixed;
   left: 0.5em;
