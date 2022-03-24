@@ -1,5 +1,4 @@
 TODO
-- bug: background particles stop moving after some game overs
 - enemies entering scene from outside
 - levels or linear difficulty increase
 - empty canvas black palette animation

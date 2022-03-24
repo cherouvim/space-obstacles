@@ -209,8 +209,11 @@
 
     let backgroundDX = 0;
     let backgroundDY = 0;
+    let previousBackgroundDirectionChangeTick = 0;
     const moveBackground = (timestamp, timestampDiff) => {
-      if (floor(timestamp) % 10 === 0) {
+      const backgroundDirectionChangeTick = floor(timestamp / 1000);
+      if (backgroundDirectionChangeTick !== previousBackgroundDirectionChangeTick) {
+        previousBackgroundDirectionChangeTick = backgroundDirectionChangeTick;
         backgroundDX = cos(timestamp / 10000);
         backgroundDY = sin(timestamp / 10000);
       }
