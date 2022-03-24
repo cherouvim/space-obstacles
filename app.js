@@ -36,15 +36,15 @@
   // ****************************** DOM ELEMENTS ******************************
   document.getElementById("content").prepend(canvas);
 
-  const fpsDom = createElementFromHTML(`<span id="fps"></span>`);
-  document.getElementById("content").append(fpsDom);
+  const healthDom = createElementFromHTML(`<div id="health"><span></span></div>`);
+  document.getElementById("content").append(healthDom);
+  const healthDomContent = healthDom.querySelector("span");
 
   const scoreDom = createElementFromHTML(`<span id="score"></span>`);
   document.getElementById("content").append(scoreDom);
 
-  const healthDom = createElementFromHTML(`<div id="health"><span></span></div>`);
-  document.getElementById("content").append(healthDom);
-  const healthDomContent = healthDom.querySelector("span");
+  const fpsDom = createElementFromHTML(`<span id="fps"></span>`);
+  document.getElementById("content").append(fpsDom);
 
   const loaderDom = createElementFromHTML(`<div id="loader" style="display: none"></div>`);
   document.getElementById("content").append(loaderDom);
@@ -87,10 +87,6 @@
     canvasLeftPad = CANVAS_MAX_SIZE < window.innerWidth ? round((window.innerWidth - CANVAS_MAX_SIZE) / 2) : 0;
     canvasTopPad = CANVAS_MAX_SIZE < window.innerHeight ? round((window.innerHeight - CANVAS_MAX_SIZE) / 2) : 0;
 
-    fpsDom.style.marginBottom = canvasTopPad + "px";
-    fpsDom.style.marginRight = canvasLeftPad + "px";
-    fpsDom.style.opacity = 0.5;
-
     healthDom.style.marginTop = canvasTopPad + "px";
     healthDom.style.marginLeft = canvasLeftPad + "px";
     healthDom.style.width = canvasCssWidth / 3 + "px";
@@ -99,6 +95,10 @@
     scoreDom.style.marginTop = canvasTopPad + "px";
     scoreDom.style.marginRight = canvasLeftPad + "px";
     scoreDom.style.opacity = 1;
+
+    fpsDom.style.marginBottom = canvasTopPad + "px";
+    fpsDom.style.marginRight = canvasLeftPad + "px";
+    fpsDom.style.opacity = 0.5;
 
     mouseX = canvasWidth / 2;
     mouseY = canvasHeight / 2;
@@ -421,8 +421,8 @@
       renderBackground();
       renderPlayer();
       renderObstacles(timestamp);
-      renderScore();
       renderHealth();
+      renderScore();
       calculateAndRenderFPS(workStartTimestamp);
       if (health === 0) {
         gameover();
