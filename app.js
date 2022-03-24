@@ -283,7 +283,11 @@
       }
       const scoreTick = floor(timestamp / 500);
       if (scoreTick !== previousScoreTick) {
-        score += (scoreTick - previousScoreTick) * 5;
+        const distanceFromCenter = sqrt(pow(player.x - canvasWidth / 2, 2) + pow(player.y - canvasHeight / 2, 2));
+        const scoreToAddBasedOnDistanceFromCenter = round(
+          5 * (1 - (0.5 * distanceFromCenter) / sqrt(pow(canvasWidth / 2, 2) + pow(canvasHeight / 2, 2)))
+        );
+        score += scoreToAddBasedOnDistanceFromCenter;
         previousScoreTick = scoreTick;
       }
     };

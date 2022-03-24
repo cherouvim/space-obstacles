@@ -8,7 +8,6 @@ TODO
 - obstacle sounds (when entering screen?)
 - visual collision feedback (health border?)
 - auditory collision feedback (damage sound needs new audio)
-- scoring improvement. player on boundaries gains less score.
 - high score (local storage)
 - space like player rotation while moving
 - improve favicon
