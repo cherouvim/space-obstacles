@@ -61,6 +61,11 @@
   const messageDom = createElementFromHTML(`<div id="message" style="display: none"></div>`);
   document.getElementById("content").append(messageDom);
 
+  // ********************** SOUNDS **********************
+  const collisionShortSound = new Howl({
+    src: ["assets/collision-short.webm", "collision-short.mp3"]
+  });
+
   // ********************** GAME SCENE OR LOGIC FUNCTIONS **********************
   const calculateObstacleLevels = () =>
     window.GAME.data.obstacles.forEach(
@@ -270,7 +275,9 @@
             "."
         );
         health = max(health - collidingItem.data.damage, 0);
-        // TODO: play damage sound
+        collisionShortSound.play();
+        healthDom.classList.add("damage");
+        window.setTimeout(() => healthDom.classList.remove("damage"), 300);
       }
       lastCollidingItem = collidingItem;
     };
@@ -396,7 +403,7 @@
         //   `window.outerWidth: ${window.outerWidth}x${window.outerHeight}<br/>` +
         //   `pixel ratio: ${PIXEL_RATIO}` +
         //   resizeText;
-        fpsDom.innerHTML = `${fps} fps`
+        fpsDom.innerHTML = `${fps} fps`;
         fps = 0;
       }
     };

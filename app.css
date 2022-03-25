@@ -95,6 +95,15 @@ canvas {
   transition: opacity 2.5s linear;
   cursor: crosshair;
 }
+@keyframes health_damage {
+  0% {
+    border-color: red;
+  }
+  100% {
+    border-color: f0ff081f;
+  }
+}
+
 #health {
   position: fixed;
   left: 0.5em;
@@ -104,6 +113,12 @@ canvas {
   height: 5vh;
   transition: opacity 4s linear;
   pointer-events: none;
+}
+#health.damage {
+  animation-name: health_damage;
+  animation-duration: 0.30s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
 }
 #health span {
   border-radius: 0.25vw;
@@ -146,8 +161,8 @@ canvas {
   font-size: 5vh;
   font-style: italic;
   line-height: 0.5em;
-  filter: drop-shadow(2px 2px 1px #000) drop-shadow(0 0 0.2rem #aa2) drop-shadow(0.1em 0.1em 0.2rem #f00) drop-shadow(-0.1em -0.1em 0.2rem #44ff4444)
-    drop-shadow(-17px -5px 0.3rem rgba(255, 0, 0, 0.3));
+  filter: drop-shadow(2px 2px 1px #000) drop-shadow(0 0 0.2rem #aa2) drop-shadow(0.1em 0.1em 0.2rem #f00)
+    drop-shadow(-0.1em -0.1em 0.2rem #44ff4444) drop-shadow(-17px -5px 0.3rem rgba(255, 0, 0, 0.3));
   pointer-events: none;
 }
 #fps {

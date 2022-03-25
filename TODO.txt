@@ -6,8 +6,6 @@ TODO
 - encode trembling into player data
 - implement player trembling
 - obstacle sounds (when entering screen?)
-- visual collision feedback (health border?)
-- auditory collision feedback (damage sound needs new audio)
 - high score (local storage)
 - space like player rotation while moving
 - full refresh on redeployment (github pages varnish? assets cache killer?)
