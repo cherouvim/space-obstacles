@@ -1,4 +1,7 @@
 TODO
+- preload collision sound
+- press start to start so sounds can be heard
+- constant collision should not be possible. use timeout to reset collision.
 - enemies entering scene from outside
 - levels or linear difficulty increase
 - empty canvas black palette animation
