@@ -13,6 +13,7 @@ TODO
 - space like player rotation while moving
 - full refresh on redeployment (github pages varnish? assets cache killer?)
 - resizing canvas needs to recalculate sizex, sizey, and radiusPixels of all elements
+- somehow ensure that obstacle and player sizes are consistent across displays
 
 MAYBE
 - improve favicon?
